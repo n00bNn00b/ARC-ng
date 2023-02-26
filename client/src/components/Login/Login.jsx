@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Divider from "../Divider/Divider";
+import GoogleLogin from "../GoogleLogin/GoogleLogin";
 
 const Login = () => {
   return (
@@ -42,14 +44,8 @@ const Login = () => {
           />
 
           <input type="button" className="btn btn-primary my-2" value="Login" />
-          <button className="btn bg-base-100 text-neutral hover:bg-primary hover:text-white">
-            <img
-              className="h-10 w-10"
-              src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
-              alt="google"
-            />
-            Login with Google
-          </button>
+          <Divider />
+          <GoogleLogin />
           <p>
             Don't have an account?{" "}
             <Link className="text-primary font-bold" to="/">
