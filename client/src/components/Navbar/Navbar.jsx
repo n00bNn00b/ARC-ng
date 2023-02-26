@@ -69,10 +69,10 @@ const Navbar = () => {
         <label htmlFor="arcng-drwaer" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 bg-accent text-white">
           <li>
-            <a>Sidebar Item 1</a>
+            <a>Dashboard</a>
           </li>
           <li>
-            <a>Sidebar Item 2</a>
+            <a>Audit</a>
           </li>
         </ul>
       </div>
