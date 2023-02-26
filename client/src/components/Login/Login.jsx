@@ -44,6 +44,12 @@ const Login = () => {
           />
 
           <input type="button" className="btn btn-primary my-2" value="Login" />
+          <p>
+            Forgot Password?{" "}
+            <Link className="text-primary font-bold" to="/">
+              Reset Password
+            </Link>{" "}
+          </p>
           <Divider />
           <GoogleLogin />
           <p>
