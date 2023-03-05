@@ -46,6 +46,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    let token;
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: "Please fillup the Data!" });
@@ -54,6 +55,12 @@ router.post("/login", async (req, res) => {
     // console.log(userLogin);
     if (userLogin) {
       const isMatched = await bcrypt.compare(password, userLogin.password);
+      token = await userLogin.generateAuthToken();
+      console.log(token);
+      res.cookie("jwt", token, {
+        expires: new Date(Date.now() + 604800000), //7days cookies
+        httpOnly: true,
+      });
       if (!isMatched) {
         res.json({ error: "Invalid Credentials!" });
       } else {
