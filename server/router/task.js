@@ -4,7 +4,7 @@ const router = express.Router();
 require("../db/conn");
 const Task = require("../model/taskSchema");
 
-router.post("/addTask", async (req, res) => {
+router.post("/addTask/", async (req, res) => {
   const taskList = req.body;
   if (!taskList) {
     return res.status(422).json({
@@ -20,7 +20,7 @@ router.post("/addTask", async (req, res) => {
   }
 });
 
-router.get("/tasks", async (req, res) => {
+router.get("/tasks/:email", async (req, res) => {
   try {
     const tasks = await Task.find({});
     res.status(200).json(tasks);
@@ -29,6 +29,11 @@ router.get("/tasks", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// draft
+router.get("/tasks/:username", async (req, res) => {
+  res.send("Working!");
+});
+//
 router.delete("/task/:id", async (req, res) => {
   const { id } = req.params;
   try {

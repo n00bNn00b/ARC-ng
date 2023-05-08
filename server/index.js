@@ -15,7 +15,7 @@ app.use(require("./router/auth"));
 app.use(require("./router/task"));
 
 app.get("/", (req, res) => {
-  res.send("Arc-ng Server is Running!");
+  res.send("Arc-ng Server is Running 😎!");
 });
 
 app.listen(port, () => {
