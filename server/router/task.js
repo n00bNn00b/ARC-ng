@@ -20,7 +20,7 @@ router.post("/addTask/", async (req, res) => {
   }
 });
 
-router.get("/tasks/:email", async (req, res) => {
+router.get("/tasks/", async (req, res) => {
   try {
     const tasks = await Task.find({});
     res.status(200).json(tasks);

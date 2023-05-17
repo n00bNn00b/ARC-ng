@@ -6,33 +6,73 @@ const authenticate = require("../middleware/authenticate");
 
 require("../db/conn");
 const User = require("../model/userSchema");
+const UserProfile = require("../model/userProfileSchema");
 
 router.post("/addUser", async (req, res) => {
-  const { name, email, username, phone, password, confirmPassword } = req.body;
-  if (!name || !email || !username || !phone || !password || !confirmPassword) {
+  const {
+    firstName,
+    middleName,
+    lastName,
+    email,
+    username,
+    phone,
+    password,
+    confirmPassword,
+  } = req.body;
+  if (
+    !firstName ||
+    !middleName ||
+    !lastName ||
+    !email ||
+    !username ||
+    !phone ||
+    !password ||
+    !confirmPassword
+  ) {
     return res
       .status(422)
       .json({ error: "Please fill the required field properly!" });
   }
   try {
-    const userExist = await User.findOne({ email: email, username: username });
+    const userExist = await User.findOne({ email: email });
+    const usernameExist = await User.findOne({ username: username });
+    const userProfileExist = await UserProfile.findOne({ email: email });
+    const usernameProfileExist = await UserProfile.findOne({
+      username: username,
+    });
 
-    if (userExist) {
+    if (userExist && userProfileExist) {
       return res
         .status(422)
         .json({ error: "A user already exists with this email!" });
+    } else if (usernameExist && usernameProfileExist) {
+      return res.status(422).json({
+        error: "A user already exists with this username!",
+      });
     } else if (password !== confirmPassword) {
       return res.status(422).json({ error: "Password did not match!" });
     } else {
       const user = new User({
-        name,
+        firstName,
+        middleName,
+        lastName,
         email,
         username,
         phone,
         password,
         confirmPassword,
       });
+
+      const userProfile = new UserProfile({
+        firstName,
+        middleName,
+        lastName,
+        email,
+        username,
+        phone,
+      });
       await user.save();
+      await userProfile.save();
       res.status(201).json({ message: "User registration successful" });
     }
     //
@@ -42,6 +82,16 @@ router.post("/addUser", async (req, res) => {
 
   //   console.log(req.body);
   //   res.json({ message: req.body });
+});
+// get user profile
+router.get("/userProfiles/", async (req, res) => {
+  try {
+    const userProffiles = await UserProfile.find({});
+    res.status(200).json(userProffiles);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
 });
 
 router.post("/login", async (req, res) => {
