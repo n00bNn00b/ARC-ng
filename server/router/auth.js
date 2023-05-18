@@ -21,7 +21,6 @@ router.post("/addUser", async (req, res) => {
   } = req.body;
   if (
     !firstName ||
-    !middleName ||
     !lastName ||
     !email ||
     !username ||
@@ -82,16 +81,6 @@ router.post("/addUser", async (req, res) => {
 
   //   console.log(req.body);
   //   res.json({ message: req.body });
-});
-// get user profile
-router.get("/userProfiles/", async (req, res) => {
-  try {
-    const userProffiles = await UserProfile.find({});
-    res.status(200).json(userProffiles);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: err.message });
-  }
 });
 
 router.post("/login", async (req, res) => {
