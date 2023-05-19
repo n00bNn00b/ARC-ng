@@ -139,13 +139,11 @@ const Signup = () => {
             /> */}
 
             <select
-              defaultValue="default"
+              defaultValue="Select Job Title"
               className="select select-bordered w-full max-w-xs"
               name="jobtitle"
             >
-              <option value="Pick Category" disabled defaultValue={0}>
-                Pick Category
-              </option>
+              <option disabled>Select Job Title</option>
               {jobtitles.map((jobtitle) => (
                 <option key={jobtitle.id} value={jobtitle.name}>
                   {jobtitle.name}
