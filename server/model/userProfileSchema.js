@@ -1,22 +1,9 @@
 const mongoose = require("mongoose");
 const userProfileSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
+  userId: {
+    type: Number,
   },
-  middleName: {
-    type: String,
-    required: false,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  jobtitle: {
-    type: String,
-    required: true,
-  },
-  email: {
+  profileType: {
     type: String,
     required: true,
   },
@@ -24,10 +11,7 @@ const userProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone: {
-    type: String,
-    required: true,
-  },
+
   //   tokens: [
   //     {
   //       token: {

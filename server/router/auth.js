@@ -10,68 +10,47 @@ const UserProfile = require("../model/userProfileSchema");
 
 router.post("/addUser", async (req, res) => {
   const {
+    userId,
     firstName,
     middleName,
     lastName,
-    email,
     jobtitle,
+    profileType,
     username,
-    phone,
     password,
     confirmPassword,
   } = req.body;
-  if (
-    !firstName ||
-    !lastName ||
-    !email ||
-    !jobtitle ||
-    !username ||
-    !phone ||
-    !password ||
-    !confirmPassword
-  ) {
+  if (!firstName || !jobtitle || !username || !password || !confirmPassword) {
     return res
       .status(422)
       .json({ error: "Please fill the required field properly!" });
   }
   try {
-    const userExist = await User.findOne({ email: email });
-    const usernameExist = await User.findOne({ username: username });
-    const userProfileExist = await UserProfile.findOne({ email: email });
-    const usernameProfileExist = await UserProfile.findOne({
+    const userIdExist = await User.findOne({ userId: userId });
+    // const userProfileIdExist = await UserProfile.findOne({ userId: userId });
+    const usernameExist = await UserProfile.findOne({
       username: username,
     });
 
-    if (userExist && userProfileExist) {
-      return res
-        .status(422)
-        .json({ error: "A user already exists with this email!" });
-    } else if (usernameExist && usernameProfileExist) {
-      return res.status(422).json({
-        error: "A user already exists with this username!",
-      });
+    if (usernameExist && userIdExist) {
+      return res.status(422).json({ error: "A user already exists!" });
     } else if (password !== confirmPassword) {
       return res.status(422).json({ error: "Password did not match!" });
     } else {
       const user = new User({
+        userId,
         firstName,
         middleName,
         lastName,
-        email,
-        username,
-        phone,
+        jobtitle,
         password,
         confirmPassword,
       });
 
       const userProfile = new UserProfile({
-        firstName,
-        middleName,
-        lastName,
-        jobtitle,
-        email,
+        userId,
+        profileType,
         username,
-        phone,
       });
       await user.save();
       await userProfile.save();

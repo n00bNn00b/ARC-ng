@@ -23,24 +23,29 @@ const Signup = () => {
     e.preventDefault();
     const firstName = e.target.firstName.value;
     const middleName = e.target.middleName.value || "";
-    const lastName = e.target.lastName.value;
-    const email = e.target.email.value;
+    const lastName = e.target.lastName.value || "";
+    // const email = e.target.email.value;
     const jobtitle = e.target.jobtitle.value;
     const username = e.target.username.value;
-    const phone = e.target.phone.value;
+    // const phone = e.target.phone.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
+    const profileType = "username";
+    const userId = Math.floor(Math.random() * 1000);
+
     console.log(jobtitle);
     if (password === confirmPassword) {
       await axios
         .post("http://localhost:5000/addUser", {
+          userId,
           firstName,
           middleName,
           lastName,
-          email,
+          // email,
           jobtitle,
+          profileType,
           username,
-          phone,
+          // phone,
           password,
           confirmPassword,
         })
@@ -100,7 +105,8 @@ const Signup = () => {
             />
             <label className="label">
               <span className="label-text font-bold">
-                Last Name <span className="text-error">*</span>{" "}
+                Last Name
+                {/* <span className="text-error">*</span>{" "} */}
               </span>
             </label>
             <input
@@ -108,10 +114,9 @@ const Signup = () => {
               placeholder="Enter your name"
               name="lastName"
               className="input input-bordered w-full max-w-xs"
-              required
             />
 
-            <label className="label">
+            {/* <label className="label">
               <span className="label-text font-bold">
                 Email <span className="text-error">*</span>
               </span>
@@ -122,7 +127,7 @@ const Signup = () => {
               name="email"
               className="input input-bordered w-full max-w-xs"
               required
-            />
+            /> */}
             <label className="label">
               <span className="label-text font-bold">
                 Job Title <span className="text-error">*</span>
@@ -161,7 +166,7 @@ const Signup = () => {
               className="input input-bordered w-full max-w-xs"
               required
             />
-            <label className="label">
+            {/* <label className="label">
               <span className="label-text font-bold">
                 Phone <span className="text-error">*</span>
               </span>
@@ -172,7 +177,7 @@ const Signup = () => {
               name="phone"
               className="input input-bordered w-full max-w-xs"
               required
-            />
+            /> */}
 
             <label className="label">
               <span className="label-text font-bold">
