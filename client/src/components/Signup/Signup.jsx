@@ -22,7 +22,7 @@ const Signup = () => {
   const userRegistrationHandler = async (e) => {
     e.preventDefault();
     const firstName = e.target.firstName.value;
-    const middleName = e.target.middleName.value || " ";
+    const middleName = e.target.middleName.value || "";
     const lastName = e.target.lastName.value;
     const email = e.target.email.value;
     const jobtitle = e.target.jobtitle.value;
@@ -70,8 +70,6 @@ const Signup = () => {
   return (
     <>
       <div className="my-20 flex mx-auto w-full">
-        {/* <LogoFull /> */}
-
         {/* form card */}
         <div className="card w-96 bg-base-100 shadow-2xl flex mx-auto">
           {/* <CardLogo /> */}
