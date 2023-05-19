@@ -3,20 +3,42 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Signup = () => {
-  const img = "https://cdn-icons-png.flaticon.com/512/5582/5582931.png";
+  // const img = "https://cdn-icons-png.flaticon.com/512/5582/5582931.png";
+
+  const jobtitles = [
+    {
+      id: 1,
+      name: "Admin",
+    },
+    {
+      id: 2,
+      name: "Manager",
+    },
+    {
+      id: 3,
+      name: "Staff",
+    },
+  ];
   const userRegistrationHandler = async (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
+    const firstName = e.target.firstName.value;
+    const middleName = e.target.middleName.value || " ";
+    const lastName = e.target.lastName.value;
     const email = e.target.email.value;
+    const jobtitle = e.target.jobtitle.value;
     const username = e.target.username.value;
     const phone = e.target.phone.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
+    console.log(jobtitle);
     if (password === confirmPassword) {
       await axios
         .post("http://localhost:5000/addUser", {
-          name,
+          firstName,
+          middleName,
+          lastName,
           email,
+          jobtitle,
           username,
           phone,
           password,
@@ -44,9 +66,10 @@ const Signup = () => {
       toast.error("Password did not match!");
     }
   };
+
   return (
     <>
-      <div className="mt-20 flex mx-auto w-full">
+      <div className="my-20 flex mx-auto w-full">
         {/* <LogoFull /> */}
 
         {/* form card */}
@@ -57,18 +80,43 @@ const Signup = () => {
               Add a New User
             </h2>
             <label className="label">
-              <span className="label-text font-bold">Name </span>
+              <span className="label-text font-bold">
+                First Name <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="text"
               placeholder="Enter your name"
-              name="name"
+              name="firstName"
+              className="input input-bordered w-full max-w-xs"
+              required
+            />
+            <label className="label">
+              <span className="label-text font-bold">Middle Name </span>
+            </label>
+            <input
+              type="text"
+              placeholder="(Optional)"
+              name="middleName"
+              className="input input-bordered w-full max-w-xs"
+            />
+            <label className="label">
+              <span className="label-text font-bold">
+                Last Name <span className="text-error">*</span>{" "}
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              name="lastName"
               className="input input-bordered w-full max-w-xs"
               required
             />
 
             <label className="label">
-              <span className="label-text font-bold">Email</span>
+              <span className="label-text font-bold">
+                Email <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="email"
@@ -78,7 +126,37 @@ const Signup = () => {
               required
             />
             <label className="label">
-              <span className="label-text font-bold">Username</span>
+              <span className="label-text font-bold">
+                Job Title <span className="text-error">*</span>
+              </span>
+            </label>
+            {/* <input
+              type="text"
+              placeholder="Enter your email address"
+              name="jobtitle"
+              className="input input-bordered w-full max-w-xs"
+              required
+            /> */}
+
+            <select
+              defaultValue="default"
+              className="select select-bordered w-full max-w-xs"
+              name="jobtitle"
+            >
+              <option value="Pick Category" disabled defaultValue={0}>
+                Pick Category
+              </option>
+              {jobtitles.map((jobtitle) => (
+                <option key={jobtitle.id} value={jobtitle.name}>
+                  {jobtitle.name}
+                </option>
+              ))}
+            </select>
+
+            <label className="label">
+              <span className="label-text font-bold">
+                Username <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="text"
@@ -88,7 +166,9 @@ const Signup = () => {
               required
             />
             <label className="label">
-              <span className="label-text font-bold">Phone</span>
+              <span className="label-text font-bold">
+                Phone <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="phone"
@@ -99,7 +179,9 @@ const Signup = () => {
             />
 
             <label className="label">
-              <span className="label-text font-bold">Password</span>
+              <span className="label-text font-bold">
+                Password <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="password"
@@ -110,7 +192,9 @@ const Signup = () => {
             />
 
             <label className="label">
-              <span className="label-text font-bold">Confirm Password</span>
+              <span className="label-text font-bold">
+                Confirm Password <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="password"

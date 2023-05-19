@@ -6,9 +6,13 @@ const userProfileSchema = new mongoose.Schema({
   },
   middleName: {
     type: String,
-    required: true,
+    required: false,
   },
   lastName: {
+    type: String,
+    required: true,
+  },
+  jobtitle: {
     type: String,
     required: true,
   },

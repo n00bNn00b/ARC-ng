@@ -14,6 +14,7 @@ router.post("/addUser", async (req, res) => {
     middleName,
     lastName,
     email,
+    jobtitle,
     username,
     phone,
     password,
@@ -23,6 +24,7 @@ router.post("/addUser", async (req, res) => {
     !firstName ||
     !lastName ||
     !email ||
+    !jobtitle ||
     !username ||
     !phone ||
     !password ||
@@ -66,6 +68,7 @@ router.post("/addUser", async (req, res) => {
         firstName,
         middleName,
         lastName,
+        jobtitle,
         email,
         username,
         phone,

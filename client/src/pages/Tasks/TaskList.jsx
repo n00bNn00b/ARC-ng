@@ -24,7 +24,7 @@ const TaskList = () => {
     });
   };
   return (
-    <div className="mt-20">
+    <div className="my-20">
       <div>
         <Link
           to="/addtask"
@@ -33,42 +33,47 @@ const TaskList = () => {
           Add Task
         </Link>
       </div>
-      <div className="overflow-x-auto mx-2">
-        <table className="table w-full">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>SL</th>
-              <th>Task Name</th>
-              <th>Task Description</th>
-              <th>Comment</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row  */}
-            {tasks.map((task, index) => {
-              return (
-                <tr key={task._id} className="hover hover:text-primary">
-                  <td>{index + 1}</td>
-                  <td>{task.taskName}</td>
-                  <td>{task.taskDescription}</td>
-                  <td>{task.taskComment}</td>
-                  <td>
-                    <label htmlFor="my-modal" className="btn btn-error btn-sm">
-                      Delete
-                    </label>
-                    <DeleteModal
-                      deleteHandler={deleteHandler}
-                      taskID={task._id}
-                      taskName={task.taskName}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="card mx-auto mb-20 bg-base-100 shadow-2xl">
+        <div className="overflow-x-auto overflow-y-auto mx-2">
+          <table className="table z-0 w-full">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>SL</th>
+                <th>Task Name</th>
+                <th>Task Description</th>
+                <th>Comment</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row  */}
+              {tasks.map((task, index) => {
+                return (
+                  <tr key={task._id} className="hover hover:text-primary">
+                    <td>{index + 1}</td>
+                    <td>{task.taskName}</td>
+                    <td>{task.taskDescription}</td>
+                    <td>{task.taskComment}</td>
+                    <td>
+                      <label
+                        htmlFor="my-modal"
+                        className="btn btn-error btn-sm"
+                      >
+                        Delete
+                      </label>
+                      <DeleteModal
+                        deleteHandler={deleteHandler}
+                        taskID={task._id}
+                        taskName={task.taskName}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
