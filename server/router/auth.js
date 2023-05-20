@@ -54,6 +54,7 @@ router.post("/addUser", async (req, res) => {
       });
       await user.save();
       await userProfile.save();
+      // console.log(user);
       res.status(201).json({ message: "User registration successful" });
     }
     //
@@ -65,18 +66,40 @@ router.post("/addUser", async (req, res) => {
   //   res.json({ message: req.body });
 });
 
+// check userid
+router.post("/userid", async (req, res) => {
+  try {
+    const { username } = req.body;
+    if (!username) {
+      return res.status(400).json({ error: "Please Fillup the data" });
+    }
+    const userNameExist = await UserProfile.findOne({ username: username });
+    if (userNameExist) {
+      const userId = userNameExist.userId;
+      // res.send(userId);
+      res.json({ uid: userId });
+      console.log(userId);
+    } else {
+      res.status(404).json({ error: "User not found!" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/login", async (req, res) => {
   try {
     let token;
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { jobtitle, userId, password } = req.body;
+    if (!jobtitle || !userId || !password) {
       return res.status(400).json({ error: "Please fillup the Data!" });
     }
-    const userLogin = await User.findOne({ email: email });
-    // console.log(userLogin.name, " : username");
-    if (userLogin) {
-      const isMatched = await bcrypt.compare(password, userLogin.password);
-      token = await userLogin.generateAuthToken();
+    const userJobTitleExist = await User.findOne({ jobtitle: jobtitle });
+    const userIdExist = await User.findOne({ userId: userId });
+
+    if (userJobTitleExist && userIdExist) {
+      const isMatched = await bcrypt.compare(password, userIdExist.password);
+      token = await userIdExist.generateAuthToken();
       console.log(token);
       res.cookie("jwt", token, {
         expires: new Date(Date.now() + 604800000), //7days cookies
@@ -86,7 +109,7 @@ router.post("/login", async (req, res) => {
         res.json({ error: "Invalid Credentials!" });
       } else {
         res.json({
-          message: "Welcome " + userLogin.name + ", Login Successful!",
+          message: "Login Successful!",
         });
       }
     } else {

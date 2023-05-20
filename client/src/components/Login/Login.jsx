@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardLogo from "../CardLogo/CardLogo";
 import LogoFull from "../LogoFull/LogoFull";
-import Divider from "../Divider/Divider";
-import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const [uid, setUid] = useState();
+  const jobtitles = [
+    {
+      id: 1,
+      name: "Admin",
+    },
+    {
+      id: 2,
+      name: "Manager",
+    },
+    {
+      id: 3,
+      name: "Staff",
+    },
+  ];
   const navigate = useNavigate();
   const loginHandler = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
+    const username = e.target.username.value;
     const password = e.target.password.value;
+    const jobtitle = e.target.jobtitle.value;
     // console.log(email, password);
+
+    await axios
+      .post("http://localhost:5000/userId", {
+        username,
+      })
+      .then((res) => setUid(res.data.uid))
+      .catch((err) => toast.error(err.response.data.error));
+
     await axios
       .post("http://localhost:5000/login", {
-        email,
+        userId: uid,
+        jobtitle,
         password,
       })
       .then((res) => {
@@ -24,6 +47,7 @@ const Login = () => {
           toast.error(res.data.error);
         } else {
           toast.success(res.data.message);
+          console.log(uid);
           navigate("/dashboard");
         }
       })
@@ -32,7 +56,7 @@ const Login = () => {
           toast.error(err.response.data.error);
         }
       });
-    e.target.reset();
+    // e.target.reset();
   };
   return (
     <>
@@ -49,13 +73,25 @@ const Login = () => {
               Welcome back! Please enter your details.
             </p>
             <form onSubmit={loginHandler}>
+              <select
+                defaultValue="Select Job Title"
+                className="select select-bordered w-full max-w-xs"
+                name="jobtitle"
+              >
+                <option disabled>Select Job Title</option>
+                {jobtitles.map((jobtitle) => (
+                  <option key={jobtitle.id} value={jobtitle.name}>
+                    {jobtitle.name}
+                  </option>
+                ))}
+              </select>
               <label className="label">
-                <span className="label-text font-bold">Email</span>
+                <span className="label-text font-bold">Uername</span>
               </label>
               <input
-                type="email"
-                name="email"
-                placeholder="Enter your email address"
+                type="text"
+                name="username"
+                placeholder="Enter your username"
                 className="input input-bordered w-full max-w-xs"
                 required
               />
@@ -83,8 +119,6 @@ const Login = () => {
                 </Link>{" "}
               </p>
             </form>
-            <Divider />
-            <GoogleLogin />
           </div>
 
           {/* <p>

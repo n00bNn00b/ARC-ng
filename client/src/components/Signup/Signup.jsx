@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Signup = () => {
   // const img = "https://cdn-icons-png.flaticon.com/512/5582/5582931.png";
-
+  const [jobtitle, setJobtitle] = useState("");
   const jobtitles = [
     {
       id: 1,
@@ -25,13 +25,14 @@ const Signup = () => {
     const middleName = e.target.middleName.value || "";
     const lastName = e.target.lastName.value || "";
     // const email = e.target.email.value;
-    const jobtitle = e.target.jobtitle.value;
+    const jobTitle = e.target.jobTitle.value;
     const username = e.target.username.value;
     // const phone = e.target.phone.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
     const profileType = "username";
     const userId = Math.floor(Math.random() * 1000);
+    setJobtitle(jobTitle);
 
     console.log(jobtitle);
     if (password === confirmPassword) {
@@ -144,7 +145,8 @@ const Signup = () => {
             <select
               defaultValue="Select Job Title"
               className="select select-bordered w-full max-w-xs"
-              name="jobtitle"
+              name="jobTitle"
+              required
             >
               <option disabled>Select Job Title</option>
               {jobtitles.map((jobtitle) => (
