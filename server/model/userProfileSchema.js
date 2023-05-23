@@ -7,7 +7,7 @@ const userProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username: {
+  profileID: {
     type: String,
     required: true,
   },

@@ -16,11 +16,11 @@ router.post("/addUser", async (req, res) => {
     lastName,
     jobtitle,
     profileType,
-    username,
+    profileID,
     password,
     confirmPassword,
   } = req.body;
-  if (!firstName || !jobtitle || !username || !password || !confirmPassword) {
+  if (!firstName || !jobtitle || !profileID || !password || !confirmPassword) {
     return res
       .status(422)
       .json({ error: "Please fill the required field properly!" });
@@ -28,11 +28,11 @@ router.post("/addUser", async (req, res) => {
   try {
     const userIdExist = await User.findOne({ userId: userId });
     // const userProfileIdExist = await UserProfile.findOne({ userId: userId });
-    const usernameExist = await UserProfile.findOne({
-      username: username,
+    const profileIDExist = await UserProfile.findOne({
+      profileID: profileID,
     });
 
-    if (usernameExist && userIdExist) {
+    if (profileIDExist && userIdExist) {
       return res.status(422).json({ error: "A user already exists!" });
     } else if (password !== confirmPassword) {
       return res.status(422).json({ error: "Password did not match!" });
@@ -50,7 +50,7 @@ router.post("/addUser", async (req, res) => {
       const userProfile = new UserProfile({
         userId,
         profileType,
-        username,
+        profileID,
       });
       await user.save();
       await userProfile.save();
@@ -66,90 +66,50 @@ router.post("/addUser", async (req, res) => {
   //   res.json({ message: req.body });
 });
 
-// check userid
-router.post("/userid", async (req, res) => {
-  try {
-    const { username } = req.body;
-    if (!username) {
-      return res.status(400).json({ error: "Please Fillup the data" });
-    }
-    const userNameExist = await UserProfile.findOne({ username: username });
-    if (userNameExist) {
-      const userId = userNameExist.userId;
-      // res.send(userId);
-      res.json({ uid: userId });
-      console.log(userId);
-    } else {
-      res.status(404).json({ error: "User not found!" });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 router.post("/login", async (req, res) => {
   try {
     let token;
-    const { jobtitle, userId, password } = req.body;
-    if (!jobtitle || !userId || !password) {
+    const { profileType, profileID, password } = req.body;
+    if (!profileType && !profileID && !password) {
       return res.status(400).json({ error: "Please fillup the Data!" });
     }
-    const userJobTitleExist = await User.findOne({ jobtitle: jobtitle });
-    const userIdExist = await User.findOne({ userId: userId });
 
-    if (userJobTitleExist && userIdExist) {
-      const isMatched = await bcrypt.compare(password, userIdExist.password);
-      token = await userIdExist.generateAuthToken();
-      console.log(token);
-      res.cookie("jwt", token, {
-        expires: new Date(Date.now() + 604800000), //7days cookies
-        httpOnly: true,
-      });
-      if (!isMatched) {
-        res.json({ error: "Invalid Credentials!" });
-      } else {
-        res.json({
-          message: "Login Successful!",
+    const profileIDExist = await UserProfile.findOne({ profileID: profileID });
+    const profileTypeExist = await UserProfile.findOne({
+      profileType: profileType,
+    });
+    if (profileIDExist && profileTypeExist) {
+      const userId = profileIDExist.userId;
+      // res.send(userId);
+      // res.json({ uid: userId });
+      // console.log(userId);
+
+      // check user ID
+      const userIdExist = await User.findOne({ userId: userId });
+
+      if (userIdExist) {
+        const isMatched = await bcrypt.compare(password, userIdExist.password);
+        token = await userIdExist.generateAuthToken();
+        console.log("token: ", token);
+        res.cookie("jwt", token, {
+          expires: new Date(Date.now() + 604800000), //7days cookies
+          httpOnly: true,
         });
+        if (!isMatched) {
+          res.json({ error: "Invalid Credentials!" });
+        } else {
+          res.json({
+            message: "Login Successful!",
+          });
+        }
+      } else {
+        res.status(400).json({ error: "Invalid Credentials!" });
       }
     } else {
-      res.status(400).json({ error: "Invalid Credentials!" });
+      res.status(404).json({ error: "User not found!" });
     }
   } catch (err) {
     console.log(err);
-  }
-});
-
-router.post("/loginwithusername", async (req, res) => {
-  try {
-    let token;
-    const { username, password } = req.body;
-    if (!username || !password) {
-      return res
-        .status(400)
-        .json({ error: "Please fillup the required data!" });
-    }
-    const usernameLogin = await User.findOne({ username: username });
-    if (usernameLogin) {
-      const isMatched = await bcrypt.compare(password, usernameLogin.password);
-      token = usernameLogin.generateAuthToken();
-      console.log("usernameToken: ", token);
-      res.cookie("jwt", token, {
-        expires: new Date(Date.now() + 604800000), //7days cookies
-        httpOnly: true,
-      });
-      if (!isMatched) {
-        res.json({ error: "Invalid Credentials!" });
-      } else {
-        res.json({
-          message: "Welcome " + usernameLogin.name + ", Login Successful!",
-        });
-      }
-    } else {
-      res.status(400).json({ error: "Invalid Credentials!" });
-    }
-  } catch (error) {
-    console.log(error);
   }
 });
 
