@@ -78,22 +78,22 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/adduser"
+                to="/manageuser"
                 className={({ isActive }) =>
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                Add User
+                Manage Users
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/profile"
+                to="/myprofile"
                 className={({ isActive }) =>
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                Profile
+                My Profile
               </NavLink>
             </li>
           </ul>
@@ -159,22 +159,22 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/adduser"
+              to="/manageuser"
               className={({ isActive }) =>
                 isActive ? "bg-warning focused" : ""
               }
             >
-              Add User
+              Manage Users
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/profile"
+              to="/myprofile"
               className={({ isActive }) =>
                 isActive ? "bg-warning focused" : ""
               }
             >
-              Profile
+              My Profile
             </NavLink>
           </li>
         </ul>

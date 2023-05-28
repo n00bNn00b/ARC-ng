@@ -25,31 +25,36 @@ const Signup = () => {
     const middleName = e.target.middleName.value || "";
     const lastName = e.target.lastName.value || "";
     // const email = e.target.email.value;
-    const jobTitle = e.target.jobTitle.value;
-    const username = e.target.username.value;
+    // const jobTitle = e.target.jobTitle.value;
+    const profileID = e.target.profileID.value;
     // const phone = e.target.phone.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
     const profileType = "username";
     const userId = Math.floor(Math.random() * 1000);
-    setJobtitle(jobTitle);
+    // setJobtitle(jobTitle);
 
-    console.log(jobtitle);
     if (password === confirmPassword) {
       await axios
-        .post("http://localhost:5000/addUser", {
-          userId,
-          firstName,
-          middleName,
-          lastName,
-          // email,
-          jobtitle,
-          profileType,
-          username,
-          // phone,
-          password,
-          confirmPassword,
-        })
+        .post(
+          "http://localhost:5000/addUser",
+          {
+            userId,
+            firstName,
+            middleName,
+            lastName,
+            // email,
+            jobtitle,
+            profileType,
+            profileID,
+            // phone,
+            password,
+            confirmPassword,
+          },
+          {
+            "Content-Type": "application/json",
+          }
+        )
         .then((res) => {
           console.log(res);
           if (res.status === 422 || !res.data) {
@@ -72,6 +77,7 @@ const Signup = () => {
       toast.error("Password did not match!");
     }
   };
+  // console.log(jobtitle);
 
   return (
     <>
@@ -147,6 +153,7 @@ const Signup = () => {
               className="select select-bordered w-full max-w-xs"
               name="jobTitle"
               required
+              onChange={(e) => setJobtitle(e.target.value)}
             >
               <option disabled>Select Job Title</option>
               {jobtitles.map((jobtitle) => (
@@ -158,13 +165,13 @@ const Signup = () => {
 
             <label className="label">
               <span className="label-text font-bold">
-                Username <span className="text-error">*</span>
+                Profile ID <span className="text-error">*</span>
               </span>
             </label>
             <input
               type="text"
-              placeholder="i.e.: josh101"
-              name="username"
+              placeholder="Enter Profile ID"
+              name="profileID"
               className="input input-bordered w-full max-w-xs"
               required
             />

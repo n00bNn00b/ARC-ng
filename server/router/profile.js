@@ -13,4 +13,14 @@ router.get("/userProfiles", async (req, res) => {
   }
 });
 
+router.get("/updateuserprofile/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const profile = await UserProfile.findById(id);
+    res.status(200).json(profile);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;

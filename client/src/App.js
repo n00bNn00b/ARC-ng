@@ -12,6 +12,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/Profile/Profile";
 import Inbox from "./pages/Inbox/Inbox";
+import UserManage from "./pages/UserManage/UserManage";
+import UpdateUserProfile from "./pages/UserManage/UpdateUserProfile";
+import AddNewProfile from "./pages/UserManage/AddNewProfile";
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/manageuser" element={<UserManage />} />
         <Route path="/adduser" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -26,7 +30,9 @@ function App() {
         <Route path="/audit" element={<Audit />} />
         <Route path="/addtask" element={<Tasks />} />
         <Route path="/tasklist" element={<TaskList />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/updateuserprofile/:id" element={<UpdateUserProfile />} />
+        <Route path="/addprofile/" element={<AddNewProfile />} />
+        <Route path="/myprofile" element={<Profile />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
       </Routes>
       <ToastContainer autoClose={3000} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardLogo from "../CardLogo/CardLogo";
 import LogoFull from "../LogoFull/LogoFull";
@@ -6,48 +6,44 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const [uid, setUid] = useState();
-  const jobtitles = [
-    {
-      id: 1,
-      name: "Admin",
-    },
-    {
-      id: 2,
-      name: "Manager",
-    },
-    {
-      id: 3,
-      name: "Staff",
-    },
-  ];
+  // const jobtitles = [
+  //   {
+  //     id: 1,
+  //     name: "Admin",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Manager",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Staff",
+  //   },
+  // ];
   const navigate = useNavigate();
   const loginHandler = async (e) => {
     e.preventDefault();
-    const username = e.target.username.value;
+    const profileID = e.target.profileID.value;
     const password = e.target.password.value;
-    const jobtitle = e.target.jobtitle.value;
-    // console.log(email, password);
-
+    const profileType = e.target.profileType.value;
     await axios
-      .post("http://localhost:5000/userId", {
-        username,
-      })
-      .then((res) => setUid(res.data.uid))
-      .catch((err) => toast.error(err.response.data.error));
-
-    await axios
-      .post("http://localhost:5000/login", {
-        userId: uid,
-        jobtitle,
-        password,
-      })
+      .post(
+        "http://localhost:5000/login",
+        {
+          profileID,
+          profileType,
+          password,
+        },
+        {
+          "Content-Type": "application/json",
+        }
+      )
       .then((res) => {
+        console.log(res.data);
         if (res.data.error) {
           toast.error(res.data.error);
         } else {
           toast.success(res.data.message);
-          console.log(uid);
           navigate("/dashboard");
         }
       })
@@ -73,7 +69,7 @@ const Login = () => {
               Welcome back! Please enter your details.
             </p>
             <form onSubmit={loginHandler}>
-              <select
+              {/* <select
                 defaultValue="Select Job Title"
                 className="select select-bordered w-full max-w-xs"
                 name="jobtitle"
@@ -84,13 +80,23 @@ const Login = () => {
                     {jobtitle.name}
                   </option>
                 ))}
-              </select>
+              </select> */}
               <label className="label">
-                <span className="label-text font-bold">Uername</span>
+                <span className="label-text font-bold">Profile Type</span>
               </label>
               <input
                 type="text"
-                name="username"
+                name="profileType"
+                placeholder="username"
+                className="input input-bordered w-full max-w-xs"
+                required
+              />
+              <label className="label">
+                <span className="label-text font-bold">Profile ID</span>
+              </label>
+              <input
+                type="text"
+                name="profileID"
                 placeholder="Enter your username"
                 className="input input-bordered w-full max-w-xs"
                 required
