@@ -7,6 +7,7 @@ import DeleteModal from "./DeleteModal";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
+  const [modal, setModal] = useState("");
   useEffect(() => {
     const url = "http://localhost:5000/tasks";
     axios.get(url).then((res) => {
@@ -61,15 +62,15 @@ const TaskList = () => {
                     <td>{task.taskComment}</td>
                     <td>
                       <label
+                        onClick={() => setModal(task)}
                         htmlFor="my-modal"
                         className="btn btn-error btn-sm"
                       >
                         Delete
                       </label>
                       <DeleteModal
+                        modal={modal}
                         deleteHandler={deleteHandler}
-                        taskID={task._id}
-                        taskName={task.taskName}
                       />
                     </td>
                   </tr>

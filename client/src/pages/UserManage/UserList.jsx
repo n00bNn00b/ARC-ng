@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import UserUpdateModal from "./UserUpdateModal";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
+  const [modal, setModal] = useState("");
   const url = "http://localhost:5000/userProfiles";
   useEffect(() => {
     axios
@@ -34,13 +36,16 @@ const UserList = () => {
                 <td>{user.profileType}</td>
                 <td>{user.profileID}</td>
                 <td className="flex space-x-2">
-                  <Link
-                    to={`/updateuserprofile/${user._id}`}
+                  <label
+                    onClick={() => setModal(user)}
+                    htmlFor="user-modal"
+                    // to={`/updateuserprofile/${user._id}`}
                     className="btn btn-warning text-white btn-sm"
                     aria-label="Update Profile"
                   >
                     Update Profile
-                  </Link>
+                  </label>
+                  <UserUpdateModal modal={modal} />
                   <Link
                     to="/addprofile"
                     className="btn btn-primary text-white btn-sm"

@@ -218,9 +218,9 @@ const Signup = () => {
               className="btn btn-primary text-white my-2"
               value="Add User"
             />
-            {/* <Divider />
-            <GoogleLogin />
-            <p>
+            {/* <Divider /> */}
+            {/* <GoogleLogin /> */}
+            {/* <p>
               Already have an account?{" "}
               <Link className="text-primary font-bold" to="/login">
                 Login

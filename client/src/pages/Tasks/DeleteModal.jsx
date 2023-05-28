@@ -1,6 +1,7 @@
 import React from "react";
 
-const DeleteModal = ({ deleteHandler, taskID, taskName }) => {
+const DeleteModal = ({ modal, deleteHandler }) => {
+  const { taskID, taskName } = modal;
   return (
     <div>
       <input type="checkbox" id="my-modal" className="modal-toggle" />
