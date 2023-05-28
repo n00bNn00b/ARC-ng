@@ -40,17 +40,17 @@ const Tasks = () => {
               type="text"
               placeholder="Task Name"
               name="task"
-              className="input input-bordered input-primary w-full max-w-xs"
+              className="input input-bordered input-primary w-full max-w-xs my-2"
               required
             />
 
             <textarea
               placeholder="Task Description"
               name="description"
-              className="textarea textarea-bordered textarea-xs textarea-primary w-full max-w-xs my-2"
+              className="textarea textarea-bordered textarea-xs textarea-primary w-full max-w-xs "
               required
             />
-            <textarea
+            <input
               placeholder="Comment"
               name="comment"
               className="textarea textarea-bordered textarea-xs textarea-primary w-full max-w-xs"

@@ -35,12 +35,12 @@ const UserList = () => {
                 <td>{index + 1}</td>
                 <td>{user.profileType}</td>
                 <td>{user.profileID}</td>
-                <td className="flex space-x-2">
+                <td className="flex space-x-2 mx-5">
                   <label
                     onClick={() => setModal(user)}
                     htmlFor="user-modal"
                     // to={`/updateuserprofile/${user._id}`}
-                    className="btn btn-warning text-white btn-sm"
+                    className="btn btn-sm btn-warning text-white "
                     aria-label="Update Profile"
                   >
                     Update Profile
@@ -48,9 +48,9 @@ const UserList = () => {
                   <UserUpdateModal modal={modal} />
                   <Link
                     to="/addprofile"
-                    className="btn btn-primary text-white btn-sm"
+                    className="btn btn-sm btn-primary text-white "
                   >
-                    Add New Profile
+                    Add Profile
                   </Link>
                 </td>
               </tr>

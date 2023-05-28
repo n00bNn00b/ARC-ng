@@ -56,24 +56,15 @@ const Navbar = () => {
                 Audit
               </NavLink>
             </li>
+
             <li>
               <NavLink
-                to="/addtask"
+                to="/managetasks"
                 className={({ isActive }) =>
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                Add Task
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/tasklist"
-                className={({ isActive }) =>
-                  isActive ? "bg-warning focused" : ""
-                }
-              >
-                Task List
+                Manage Tasks
               </NavLink>
             </li>
             <li>
@@ -137,24 +128,15 @@ const Navbar = () => {
               Audit
             </NavLink>
           </li>
+
           <li>
             <NavLink
-              to="/addtask"
+              to="/managetasks"
               className={({ isActive }) =>
                 isActive ? "bg-warning focused" : ""
               }
             >
-              Add Task
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/tasklist"
-              className={({ isActive }) =>
-                isActive ? "bg-warning focused" : ""
-              }
-            >
-              Task List
+              Manage Tasks
             </NavLink>
           </li>
           <li>

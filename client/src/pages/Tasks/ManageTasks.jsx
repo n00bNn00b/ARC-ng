@@ -12,7 +12,7 @@ const TaskList = () => {
     const url = "http://localhost:5000/tasks";
     axios.get(url).then((res) => {
       setTasks(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     });
   }, []);
 
@@ -20,7 +20,7 @@ const TaskList = () => {
     console.log(id);
     axios.delete(`http://localhost:5000/task/${id}`).then((res) => {
       if (res.status === 200) {
-        const newTasks = tasks.filter((task) => task._id);
+        const newTasks = tasks.filter((task) => task._id !== id);
         setTasks([...newTasks]);
         toast.success(res.data.message);
       } else {

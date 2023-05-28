@@ -1,7 +1,7 @@
 import React from "react";
 
 const DeleteModal = ({ modal, deleteHandler }) => {
-  const { taskID, taskName } = modal;
+  const { _id, taskName } = modal;
   return (
     <div>
       <input type="checkbox" id="my-modal" className="modal-toggle" />
@@ -16,11 +16,12 @@ const DeleteModal = ({ modal, deleteHandler }) => {
             </span>{" "}
             ?
           </p>
+          <p>{_id}</p>
           <div className="modal-action">
             <label
               htmlFor="my-modal"
               className="btn btn-error"
-              onClick={() => deleteHandler(taskID)}
+              onClick={() => deleteHandler(_id)}
             >
               Yes
             </label>

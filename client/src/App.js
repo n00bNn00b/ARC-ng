@@ -6,8 +6,8 @@ import ResetPassword from "./components/ResetPassword/ResetPassword";
 import Signup from "./components/Signup/Signup";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Audit from "./pages/Audit/Audit";
-import Tasks from "./pages/Tasks/Tasks";
-import TaskList from "./pages/Tasks/TaskList";
+import ManageTasks from "./pages/Tasks/ManageTasks";
+import AddTask from "./pages/Tasks/AddTask";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/Profile/Profile";
@@ -28,8 +28,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/audit" element={<Audit />} />
-        <Route path="/addtask" element={<Tasks />} />
-        <Route path="/tasklist" element={<TaskList />} />
+        <Route path="/managetasks" element={<ManageTasks />} />
+        <Route path="/addtask" element={<AddTask />} />
         <Route path="/updateuserprofile/:id" element={<UpdateUserProfile />} />
         <Route path="/addprofile/" element={<AddNewProfile />} />
         <Route path="/myprofile" element={<Profile />} />
