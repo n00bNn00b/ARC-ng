@@ -40,20 +40,20 @@ const Tasks = () => {
               type="text"
               placeholder="Task Name"
               name="task"
-              className="input input-bordered input-primary w-full max-w-xs my-2"
+              className="input input-bordered input-primary w-full max-w-xs"
               required
             />
 
             <textarea
               placeholder="Task Description"
               name="description"
-              className="textarea textarea-bordered textarea-xs textarea-primary w-full max-w-xs "
+              className="textarea textarea-bordered textarea-xs textarea-primary my-3 w-full max-w-xs "
               required
             />
             <input
               placeholder="Comment"
               name="comment"
-              className="textarea textarea-bordered textarea-xs textarea-primary w-full max-w-xs"
+              className="input input-bordered input-primary w-full max-w-xs"
               required
             />
 
@@ -64,10 +64,10 @@ const Tasks = () => {
             />
           </form>
           <Link
-            to="/tasklist"
+            to="/managetasks"
             className="flex text-white mx-auto btn btn-sm btn-success"
           >
-            Task List
+            Manage Tasks
           </Link>
         </div>
       </div>

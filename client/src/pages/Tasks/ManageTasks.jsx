@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import DeleteModal from "./DeleteModal";
+import TaskUpdateModal from "./TaskUpdateModal";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -39,46 +40,61 @@ const TaskList = () => {
         </Link>
       </div>
       <div className="card mx-auto mb-20 bg-base-100 shadow-2xl">
-        <div className="overflow-x-auto overflow-y-auto mx-2">
-          <table className="table z-0 w-full">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>SL</th>
-                <th>Task Name</th>
-                <th>Task Description</th>
-                <th>Comment</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row  */}
-              {tasks.map((task, index) => {
-                return (
-                  <tr key={task._id} className="hover hover:text-primary">
-                    <td>{index + 1}</td>
-                    <td>{task.taskName}</td>
-                    <td>{task.taskDescription}</td>
-                    <td>{task.taskComment}</td>
-                    <td>
-                      <label
-                        onClick={() => setModal(task)}
-                        htmlFor="my-modal"
-                        className="btn btn-error btn-sm"
-                      >
-                        Delete
-                      </label>
-                      <DeleteModal
-                        modal={modal}
-                        deleteHandler={deleteHandler}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        {tasks.length !== 0 ? (
+          <div className="overflow-x-auto overflow-y-auto mx-2">
+            <table className="table z-0 w-full">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>SL</th>
+                  <th>Task Name</th>
+                  <th>Task Description</th>
+                  <th>Comment</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row  */}
+                {tasks.map((task, index) => {
+                  return (
+                    <tr key={task._id} className="hover hover:text-primary">
+                      <td>{index + 1}</td>
+                      <td>{task.taskName}</td>
+                      <td>{task.taskDescription.slice(0, 20) + " ..."}</td>
+                      <td>{task.taskComment}</td>
+                      <td>
+                        <label
+                          onClick={() => setModal(task)}
+                          htmlFor="update-modal"
+                          className="btn btn-warning text-white mx-3 btn-sm"
+                        >
+                          Update
+                        </label>
+
+                        <label
+                          onClick={() => setModal(task)}
+                          htmlFor="my-modal"
+                          className="btn btn-error btn-sm"
+                        >
+                          Delete
+                        </label>
+                        <TaskUpdateModal modal={modal} />
+                        <DeleteModal
+                          modal={modal}
+                          deleteHandler={deleteHandler}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="flex mx-auto shadow-2xl text-white text-xl badge badge-2xl badge-warning">
+            No Task Has been Assigned Yet!
+          </div>
+        )}
       </div>
     </div>
   );

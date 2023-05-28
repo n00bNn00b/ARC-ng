@@ -16,8 +16,9 @@ const UserUpdateModal = ({ modal }) => {
           <h3 className="font-bold text-lg">{profileType}</h3>
           <p className="py-4">{profileID}</p>
           <div className="modal-action">
-            <label htmlFor="user-modal" className="btn">
-              Update
+            <button className="btn btn-primary text-white">Update</button>
+            <label htmlFor="user-modal" className="btn btn-error text-white">
+              Cancel
             </label>
           </div>
         </div>
