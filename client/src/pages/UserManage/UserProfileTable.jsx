@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import UserUpdateModal from "./UserUpdateModal";
 import { Link } from "react-router-dom";
 
-const UserProfileTable = ({ profiles, users }) => {
+const UserProfileTable = ({ profiles }) => {
   const [modal, setModal] = useState("");
+
   return (
     <div className="overflow-x-auto overflow-y-auto mx-2">
+      <h2 className="text-center text-primary text-xl mb-3">User Profiles</h2>
       <table className="table z-0 w-full">
         {/* head */}
         <thead>
@@ -22,7 +24,7 @@ const UserProfileTable = ({ profiles, users }) => {
           {profiles.map((profile, index) => (
             <tr
               key={profile._id}
-              className=" hover:cursor-pointer"
+              className="hover:cursor-pointer"
               //   onClick={() => handleUserSelect(user.userId)}
             >
               <td>{index + 1}</td>

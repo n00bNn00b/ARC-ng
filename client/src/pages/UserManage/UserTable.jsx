@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const UserTable = ({ users, handleUserSelect }) => {
+  const [selected, setSelected] = useState(null);
   return (
     <div className="overflow-x-auto overflow-y-auto mx-2">
+      <h2 className="text-center text-primary text-xl mb-3">Users</h2>
       <table className="table z-0 w-full">
         {/* head */}
         <thead>
@@ -10,7 +12,6 @@ const UserTable = ({ users, handleUserSelect }) => {
             <th>SL</th>
             <th>First Name</th>
             <th>Last Name</th>
-            {/* <th>Action</th> */}
           </tr>
         </thead>
         <tbody>
@@ -19,30 +20,17 @@ const UserTable = ({ users, handleUserSelect }) => {
           {users.map((user, index) => (
             <tr
               key={user._id}
-              className=" hover:cursor-pointer hover:select-text"
-              onClick={() => handleUserSelect(user.userId)}
+              className={`hover:cursor-pointer ${
+                selected === user._id ? "active text-primary font-bold" : ""
+              }`}
+              onClick={() => {
+                handleUserSelect(user.userId);
+                setSelected(user._id);
+              }}
             >
               <td>{index + 1}</td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
-              {/* <td className="flex space-x-2 mx-5">
-                  <label
-                    onClick={() => setModal(user)}
-                    htmlFor="user-modal"
-                    // to={`/updateuserprofile/${user._id}`}
-                    className="btn btn-sm btn-warning text-white "
-                    aria-label="Update Profile"
-                  >
-                    Update Profile
-                  </label>
-                  <UserUpdateModal modal={modal} />
-                  <Link
-                    to="/addprofile"
-                    className="btn btn-sm btn-primary text-white "
-                  >
-                    Add Profile
-                  </Link>
-                </td> */}
             </tr>
           ))}
         </tbody>
