@@ -1,63 +1,55 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import UserUpdateModal from "./UserUpdateModal";
+import UserTable from "./UserTable";
+import UserProfileTable from "./UserProfileTable";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const [modal, setModal] = useState("");
-  const url = "http://localhost:5000/userProfiles";
+  const [profiles, setProfiles] = useState([]);
+  const url = "http://localhost:5000/users";
+
   useEffect(() => {
     axios
       .get(url)
-      .then((res) => setUsers(res.data))
+      .then((res) => {
+        setUsers(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
-  console.log(users);
+  // console.log(users);
+
+  const handleUserSelect = async (id) => {
+    try {
+      console.log(id);
+
+      const response = await axios.get(
+        `http://localhost:5000/userprofile/${id}`
+      );
+
+      if (response.data) {
+        const profile = response.data;
+        console.log(profile);
+        setProfiles(profile);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //
   return (
     <div className="card  mx-auto my-10 mb-20 bg-base-100 shadow-2xl">
-      <div className="overflow-x-auto overflow-y-auto mx-2">
-        <table className="table z-0 w-full">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>SL</th>
-              <th>Profile Type</th>
-              <th>Profile ID</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row  */}
-
-            {users.map((user, index) => (
-              <tr key={user._id} className="hover hover:text-primary">
-                <td>{index + 1}</td>
-                <td>{user.profileType}</td>
-                <td>{user.profileID}</td>
-                <td className="flex space-x-2 mx-5">
-                  <label
-                    onClick={() => setModal(user)}
-                    htmlFor="user-modal"
-                    // to={`/updateuserprofile/${user._id}`}
-                    className="btn btn-sm btn-warning text-white "
-                    aria-label="Update Profile"
-                  >
-                    Update Profile
-                  </label>
-                  <UserUpdateModal modal={modal} />
-                  <Link
-                    to="/addprofile"
-                    className="btn btn-sm btn-primary text-white "
-                  >
-                    Add Profile
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {profiles.length !== 0 ? (
+        <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 mx-10">
+          <UserTable handleUserSelect={handleUserSelect} users={users} />
+          <UserProfileTable profiles={profiles} />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1">
+          <UserTable handleUserSelect={handleUserSelect} users={users} />
+          {profiles.length !== 0 && <UserProfileTable profiles={profiles} />}
+        </div>
+      )}
     </div>
   );
 };
