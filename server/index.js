@@ -12,7 +12,7 @@ app.use(require("./router/task"));
 app.use(require("./router/profile"));
 
 app.use(express.static(path.join(__dirname, "/client/build")));
-app.use("*", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 app.get("/", (req, res) => {
