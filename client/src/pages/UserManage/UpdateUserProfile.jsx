@@ -10,7 +10,7 @@ const UpdateUserProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/updateuserprofile/${id}`)
+      .get(`/updateuserprofile/${id}`)
       .then((res) => {
         setProfileType(res.data.profileType);
         setProfileID(res.data.profileID);

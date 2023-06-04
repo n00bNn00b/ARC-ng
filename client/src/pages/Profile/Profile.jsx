@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 
 const Profile = () => {
-  const url = "http://localhost:5000/userProfiles";
+  const url = "/userProfiles";
   useEffect(() => {
     axios
       .get(url)

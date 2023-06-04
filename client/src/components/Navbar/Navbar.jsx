@@ -79,12 +79,12 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/myprofile"
+                to="/myprofiles"
                 className={({ isActive }) =>
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                My Profile
+                My Profile(s)
               </NavLink>
             </li>
           </ul>
@@ -151,12 +151,12 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/myprofile"
+              to="/myprofiles"
               className={({ isActive }) =>
                 isActive ? "bg-warning focused" : ""
               }
             >
-              My Profile
+              My Profile(s)
             </NavLink>
           </li>
         </ul>

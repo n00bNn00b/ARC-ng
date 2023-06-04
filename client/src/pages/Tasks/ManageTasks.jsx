@@ -9,8 +9,9 @@ import TaskUpdateModal from "./TaskUpdateModal";
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [modal, setModal] = useState("");
+  const [selected, setSelected] = useState();
   useEffect(() => {
-    const url = "http://localhost:5000/tasks";
+    const url = "/tasks";
     axios.get(url).then((res) => {
       setTasks(res.data);
       // console.log(res.data);
@@ -19,7 +20,7 @@ const TaskList = () => {
 
   const deleteHandler = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:5000/task/${id}`).then((res) => {
+    axios.delete(`/task/${id}`).then((res) => {
       if (res.status === 200) {
         const newTasks = tasks.filter((task) => task._id !== id);
         setTasks([...newTasks]);
@@ -57,14 +58,22 @@ const TaskList = () => {
                 {/* row  */}
                 {tasks.map((task, index) => {
                   return (
-                    <tr key={task._id} className="hover hover:text-primary">
+                    <tr
+                      key={task._id}
+                      className={`hover:text-primary ${
+                        selected === task._id ? "active text-primary" : ""
+                      } `}
+                    >
                       <td>{index + 1}</td>
                       <td>{task.taskName}</td>
                       <td>{task.taskDescription.slice(0, 20) + " ..."}</td>
                       <td>{task.taskComment}</td>
                       <td>
                         <label
-                          onClick={() => setModal(task)}
+                          onClick={() => {
+                            setModal(task);
+                            setSelected(task._id);
+                          }}
                           htmlFor="update-modal"
                           className="btn btn-warning text-white mx-3 btn-sm"
                         >

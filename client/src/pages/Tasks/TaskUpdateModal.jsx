@@ -5,8 +5,8 @@ const TaskUpdateModal = ({ modal }) => {
   return (
     <div>
       <input type="checkbox" id="update-modal" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
+      <div className="modal modal-bottom  sm:modal-middle">
+        <form className="modal-box">
           <input
             type="text"
             placeholder="Task Name"
@@ -23,6 +23,7 @@ const TaskUpdateModal = ({ modal }) => {
             required
             defaultValue={taskDescription}
           />
+
           <input
             type="text"
             placeholder="Comment"
@@ -33,12 +34,16 @@ const TaskUpdateModal = ({ modal }) => {
           />
 
           <div className="modal-action">
-            <button className="btn btn-primary text-white">Update</button>
+            <input
+              type="SUBMIT"
+              defaultValue="UPDATE"
+              className="btn btn-primary text-white"
+            />
             <label htmlFor="update-modal" className="btn btn-error text-white">
               Cancel
             </label>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

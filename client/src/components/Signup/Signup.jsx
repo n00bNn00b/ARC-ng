@@ -37,7 +37,7 @@ const Signup = () => {
     if (password === confirmPassword) {
       await axios
         .post(
-          "http://localhost:5000/addUser",
+          "/addUser",
           {
             userId,
             firstName,

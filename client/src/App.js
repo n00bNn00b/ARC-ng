@@ -32,7 +32,7 @@ function App() {
         <Route path="/addtask" element={<AddTask />} />
         <Route path="/updateuserprofile/:id" element={<UpdateUserProfile />} />
         <Route path="/addprofile/" element={<AddNewProfile />} />
-        <Route path="/myprofile" element={<Profile />} />
+        <Route path="/myprofiles" element={<Profile />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
       </Routes>
       <ToastContainer autoClose={3000} />

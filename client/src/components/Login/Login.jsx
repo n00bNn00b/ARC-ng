@@ -28,7 +28,7 @@ const Login = () => {
     const profileType = e.target.profileType.value;
     await axios
       .post(
-        "http://localhost:5000/login",
+        "/login",
         {
           profileID,
           profileType,

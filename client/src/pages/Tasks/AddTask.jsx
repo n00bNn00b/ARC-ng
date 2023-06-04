@@ -12,7 +12,7 @@ const Tasks = () => {
     // console.log(taskDescription, taskComment);
     e.target.reset();
 
-    const url = "http://localhost:5000/addTask";
+    const url = "/addTask";
     axios
       .post(url, {
         taskName,

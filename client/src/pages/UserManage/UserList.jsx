@@ -6,11 +6,11 @@ import UserProfileTable from "./UserProfileTable";
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [profiles, setProfiles] = useState([]);
-  const url = "http://localhost:5000/users";
+  // const url = "http://localhost:5000/users";
 
   useEffect(() => {
     axios
-      .get(url)
+      .get("/users")
       .then((res) => {
         setUsers(res.data);
       })
@@ -22,9 +22,7 @@ const UserList = () => {
     try {
       console.log(id);
 
-      const response = await axios.get(
-        `http://localhost:5000/userprofile/${id}`
-      );
+      const response = await axios.get(`/userprofile/${id}`);
 
       if (response.data) {
         const profile = response.data;
