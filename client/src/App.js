@@ -15,6 +15,7 @@ import Inbox from "./pages/Inbox/Inbox";
 import UserManage from "./pages/UserManage/UserManage";
 import UpdateUserProfile from "./pages/UserManage/UpdateUserProfile";
 import AddNewProfile from "./pages/UserManage/AddNewProfile";
+import EnterPriseSetup from "./pages/EnterPriseSetup/EnterPriseSetup";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/adduser" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/enterprisesetup" element={<EnterPriseSetup />} />
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/audit" element={<Audit />} />
         <Route path="/managetasks" element={<ManageTasks />} />
