@@ -30,6 +30,10 @@ router.post("/addUser", async (req, res) => {
     MIDDLE_NAME,
     LAST_NAME,
     JOB_TITLE,
+    CREATED_BY,
+    CREATED_ON,
+    LAST_UPDATED_BY,
+    LAST_UPDATED_ON,
     LINE_MANAGER_USER_ID,
     TENANT_ID,
     PROFILE_TYPE,
@@ -66,12 +70,22 @@ router.post("/addUser", async (req, res) => {
         PROFILE_NAME,
       });
 
+      const user = new User({
+        USER_ID,
+        CREATED_BY,
+        CREATED_ON,
+        LAST_UPDATED_BY,
+        LAST_UPDATED_ON,
+        TENANT_ID,
+      });
+
       const credential = new Credentials({
         USER_ID,
         PASSWORD,
       });
       await person.save();
       await profile.save();
+      await user.save();
       await credential.save();
       //   console.log(person);
       //   console.log(profile, "profile");
