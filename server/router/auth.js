@@ -10,6 +10,15 @@ const UserProfile = require("../model/userProfileSchema");
 const PERSONS = require("../model/personSchema");
 const Credentials = require("../model/credentialSchema");
 
+/**
+ *
+ *
+ * @@@ Checks PROFILE_TYPE and PROFILE_NAME in ARC_USER_PROFILES collection and if they exist retrieves USER_ID.
+ *
+ * @@@ If USER_ID exists in ARC_USER_CREDENTIALS Collection, verifies PASSWORD
+ *
+ */
+
 router.post("/login", async (req, res) => {
   try {
     let token;
