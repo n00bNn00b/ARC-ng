@@ -7,79 +7,25 @@ const authenticate = require("../middleware/authenticate");
 require("../db/conn");
 const User = require("../model/userSchema");
 const UserProfile = require("../model/userProfileSchema");
-
-router.post("/addUser", async (req, res) => {
-  const {
-    userId,
-    firstName,
-    middleName,
-    lastName,
-    jobtitle,
-    profileType,
-    profileID,
-    password,
-    confirmPassword,
-  } = req.body;
-  if (!firstName || !jobtitle || !profileID || !password || !confirmPassword) {
-    return res
-      .status(422)
-      .json({ error: "Please fill the required field properly!" });
-  }
-  try {
-    const userIdExist = await User.findOne({ userId: userId });
-    // const userProfileIdExist = await UserProfile.findOne({ userId: userId });
-    const profileIDExist = await UserProfile.findOne({
-      profileID: profileID,
-    });
-
-    if (profileIDExist && userIdExist) {
-      return res.status(422).json({ error: "A user already exists!" });
-    } else if (password !== confirmPassword) {
-      return res.status(422).json({ error: "Password did not match!" });
-    } else {
-      const user = new User({
-        userId,
-        firstName,
-        middleName,
-        lastName,
-        jobtitle,
-        password,
-        confirmPassword,
-      });
-
-      const userProfile = new UserProfile({
-        userId,
-        profileType,
-        profileID,
-      });
-      await user.save();
-      await userProfile.save();
-      // console.log(user);
-      res.status(201).json({ message: "User registration successful" });
-    }
-    //
-  } catch (err) {
-    console.log(err);
-  }
-
-  //   console.log(req.body);
-  //   res.json({ message: req.body });
-});
+const PERSONS = require("../model/personSchema");
+const Credentials = require("../model/credentialSchema");
 
 router.post("/login", async (req, res) => {
   try {
     let token;
-    const { profileType, profileID, password } = req.body;
-    if (!profileType && !profileID && !password) {
+    const { PROFILE_TYPE, PROFILE_NAME, PASSWORD } = req.body;
+    if (!PROFILE_TYPE && !PROFILE_NAME && !PASSWORD) {
       return res.status(400).json({ error: "Please fillup the Data!" });
     }
 
-    const profileIDExist = await UserProfile.findOne({ profileID: profileID });
+    const profileNameExist = await UserProfile.findOne({
+      PROFILE_NAME: PROFILE_NAME,
+    });
     const profileTypeExist = await UserProfile.findOne({
-      profileType: profileType,
+      PROFILE_TYPE: PROFILE_TYPE,
     });
     if (profileIDExist && profileTypeExist) {
-      const userId = profileIDExist.userId;
+      const USER_ID = profileIDExist.USER_ID;
       // res.send(userId);
       // res.json({ uid: userId });
       // console.log(userId);

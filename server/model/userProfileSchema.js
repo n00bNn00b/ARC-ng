@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
 const userProfileSchema = new mongoose.Schema({
-  userId: {
+  USER_ID: {
     type: Number,
-  },
-  profileType: {
-    type: String,
     required: true,
   },
-  profileID: {
+  PROFILE_TYPE: {
     type: String,
-    required: true,
+  },
+  PROFILE_NAME: {
+    type: String,
   },
 
   //   tokens: [
@@ -22,5 +21,5 @@ const userProfileSchema = new mongoose.Schema({
   //   ],
 });
 
-const UserProfile = mongoose.model("USERPROFILE", userProfileSchema);
+const UserProfile = mongoose.model("ARC_USER_PROFILES", userProfileSchema);
 module.exports = UserProfile;
