@@ -28,8 +28,8 @@ const UserProfileTable = ({ profiles }) => {
               //   onClick={() => handleUserSelect(user.userId)}
             >
               <td>{index + 1}</td>
-              <td>{profile.profileType}</td>
-              <td>{profile.profileID}</td>
+              <td>{profile.PROFILE_TYPE}</td>
+              <td>{profile.PROFILE_NAME}</td>
               <td className="flex space-x-2 mx-5">
                 <label
                   onClick={() => setModal(profile)}

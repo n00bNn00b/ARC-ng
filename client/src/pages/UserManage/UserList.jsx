@@ -10,7 +10,7 @@ const UserList = () => {
 
   useEffect(() => {
     axios
-      .get("/users")
+      .get("http://localhost:5000/persons")
       .then((res) => {
         setUsers(res.data);
       })
@@ -20,13 +20,13 @@ const UserList = () => {
 
   const handleUserSelect = async (id) => {
     try {
-      console.log(id);
+      // console.log(id);
 
       const response = await axios.get(`/userprofile/${id}`);
 
       if (response.data) {
         const profile = response.data;
-        console.log(profile);
+        // console.log(profile);
         setProfiles(profile);
       }
     } catch (err) {

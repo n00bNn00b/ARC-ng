@@ -24,13 +24,13 @@ const UserTable = ({ users, handleUserSelect }) => {
                 selected === user._id ? "active text-primary font-bold" : ""
               }`}
               onClick={() => {
-                handleUserSelect(user.userId);
+                handleUserSelect(user.USER_ID);
                 setSelected(user._id);
               }}
             >
               <td>{index + 1}</td>
-              <td>{user.firstName}</td>
-              <td>{user.lastName}</td>
+              <td>{user.FIRST_NAME}</td>
+              <td>{user.LAST_NAME}</td>
             </tr>
           ))}
         </tbody>
