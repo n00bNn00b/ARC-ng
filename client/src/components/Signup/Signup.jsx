@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 const Signup = () => {
   // const img = "https://cdn-icons-png.flaticon.com/512/5582/5582931.png";
-  const [jobtitle, setJobtitle] = useState("");
+  const [JOB_TITLE, setJobtitle] = useState("");
   const jobtitles = [
     {
       id: 1,
@@ -21,35 +21,34 @@ const Signup = () => {
   ];
   const userRegistrationHandler = async (e) => {
     e.preventDefault();
-    const firstName = e.target.firstName.value;
-    const middleName = e.target.middleName.value || "";
-    const lastName = e.target.lastName.value || "";
+    const FIRST_NAME = e.target.firstName.value;
+    const MIDDLE_NAME = e.target.middleName.value || "";
+    const LAST_NAME = e.target.lastName.value || "";
     // const email = e.target.email.value;
     // const jobTitle = e.target.jobTitle.value;
-    const profileID = e.target.profileID.value;
+    const PROFILE_NAME = e.target.profileName.value;
     // const phone = e.target.phone.value;
-    const password = e.target.password.value;
+    const PASSWORD = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
-    const profileType = "username";
-    const userId = Math.floor(Math.random() * 1000);
+    const PROFILE_TYPE = "USERNAME";
+    const USER_ID = Math.floor(Math.random() * 1000 * 10000000);
     // setJobtitle(jobTitle);
-
-    if (password === confirmPassword) {
+    // console.log(USER_ID);
+    if (PASSWORD === confirmPassword) {
       await axios
         .post(
           "/addUser",
           {
-            userId,
-            firstName,
-            middleName,
-            lastName,
+            USER_ID,
+            FIRST_NAME,
+            MIDDLE_NAME,
+            LAST_NAME,
             // email,
-            jobtitle,
-            profileType,
-            profileID,
+            JOB_TITLE,
+            PROFILE_TYPE,
+            PROFILE_NAME,
             // phone,
-            password,
-            confirmPassword,
+            PASSWORD,
           },
           {
             "Content-Type": "application/json",
@@ -77,7 +76,7 @@ const Signup = () => {
       toast.error("Password did not match!");
     }
   };
-  // console.log(jobtitle);
+  // console.log(JOB_TITLE);
 
   return (
     <>
@@ -165,13 +164,13 @@ const Signup = () => {
 
             <label className="label">
               <span className="label-text font-bold">
-                Profile ID <span className="text-error">*</span>
+                Profile Name <span className="text-error">*</span>
               </span>
             </label>
             <input
               type="text"
-              placeholder="Enter Profile ID"
-              name="profileID"
+              placeholder="Enter Profile Name"
+              name="profileName"
               className="input input-bordered w-full max-w-xs"
               required
             />
