@@ -24,17 +24,17 @@ router.post("/login", async (req, res) => {
     const profileTypeExist = await UserProfile.findOne({
       PROFILE_TYPE: PROFILE_TYPE,
     });
-    if (profileIDExist && profileTypeExist) {
-      const USER_ID = profileIDExist.USER_ID;
+    if (profileNameExist && profileTypeExist) {
+      const USER_ID = profileNameExist.USER_ID;
       // res.send(userId);
       // res.json({ uid: userId });
       // console.log(userId);
 
       // check user ID
-      const userIdExist = await User.findOne({ userId: userId });
+      const userIdExist = await Credentials.findOne({ USER_ID: USER_ID });
 
       if (userIdExist) {
-        const isMatched = await bcrypt.compare(password, userIdExist.password);
+        const isMatched = await bcrypt.compare(PASSWORD, userIdExist.PASSWORD);
         token = await userIdExist.generateAuthToken();
         console.log("token: ", token);
         res.cookie("jwt", token, {

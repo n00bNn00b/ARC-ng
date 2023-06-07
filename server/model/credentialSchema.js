@@ -23,9 +23,8 @@ const credentialSchema = new mongoose.Schema({
 
 credentialSchema.pre("save", async function (next) {
   // console.log("password before");
-  if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 12);
-    this.confirmPassword = await bcrypt.hash(this.confirmPassword, 12);
+  if (this.isModified("PASSWORD")) {
+    this.PASSWORD = await bcrypt.hash(this.PASSWORD, 12);
   }
   next();
 });
