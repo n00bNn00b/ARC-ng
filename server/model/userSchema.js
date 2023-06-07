@@ -6,19 +6,19 @@ const userSchema = new mongoose.Schema({
   },
   CREATED_BY: {
     type: String,
-    required: true,
+    // required: true,
   },
   CREATED_ON: {
     type: Date,
-    required: true,
+    // required: true,
   },
   LAST_UPDATED_BY: {
     type: String,
-    required: true,
+    // required: true,
   },
   LAST_UPDATED_ON: {
     type: Date,
-    required: true,
+    // required: true,
   },
   TENANT_ID: {
     type: Number,
