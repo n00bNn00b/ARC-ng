@@ -3,10 +3,11 @@ const router = express.Router();
 
 const UserProfile = require("../model/userProfileSchema");
 const User = require("../model/userSchema");
+const PERSONS = require("../model/personSchema");
 // get user profile
-router.get("/userProfiles", async (req, res) => {
+router.get("/persons", async (req, res) => {
   try {
-    const userProffiles = await UserProfile.find({});
+    const userProffiles = await PERSONS.find({});
     // const data = userProffiles.map((profile) => ({
     //   userId: profile.userId,
     //   profileID: profile.profileID,
@@ -23,7 +24,7 @@ router.get("/userprofile/:id", async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id);
-    const profiles = await UserProfile.find({ userId: id });
+    const profiles = await UserProfile.find({ USER_ID: id });
     res.status(200).json(profiles);
   } catch (error) {
     console.log(error);
@@ -33,14 +34,14 @@ router.get("/userprofile/:id", async (req, res) => {
 //get user data
 router.get("/users", async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await PERSONS.find({});
     const data = users.map((user) => ({
       _id: user._id,
-      userId: user.userId,
-      firstName: user.firstName,
-      middleName: user.middleName,
-      lastName: user.lastName,
-      jobtitle: user.jobtitle,
+      USER_ID: user.USER_ID,
+      FIRST_NAME: user.FIRST_NAME,
+      MIDDLE_NAME: user.MIDDLE_NAME,
+      LAST_NAME: user.LAST_NAME,
+      JOB_TITLE: user.JOB_TITLE,
     }));
     res.status(200).json(data);
     // res.send(data);
@@ -56,12 +57,12 @@ router.get("/users", async (req, res) => {
  */
 
 router.post("/addprofile", async (req, res) => {
-  const { userId, profileType, profileID } = req.body;
+  const { USER_ID, PROFILE_TYPE, PROFILE_NAME } = req.body;
   try {
     const userProfile = new UserProfile({
-      userId,
-      profileType,
-      profileID,
+      USER_ID,
+      PROFILE_TYPE,
+      PROFILE_NAME,
     });
 
     await userProfile.save();
