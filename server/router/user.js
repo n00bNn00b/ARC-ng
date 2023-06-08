@@ -101,4 +101,14 @@ router.post("/addUser", async (req, res) => {
   //   res.json({ message: req.body });
 });
 
+router.get("/arcusers", async (req, res) => {
+  try {
+    const arcUsers = await User.find({});
+    res.status(200).json(arcUsers);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;
