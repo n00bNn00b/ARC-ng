@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 const Signup = () => {
   // const img = "https://cdn-icons-png.flaticon.com/512/5582/5582931.png";
   const [JOB_TITLE, setJobtitle] = useState("");
+
   const jobtitles = [
     {
       id: 1,
@@ -19,6 +20,14 @@ const Signup = () => {
       name: "Staff",
     },
   ];
+
+  let today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  let time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  let dateTime = date + " " + time;
+  console.log(dateTime);
   const userRegistrationHandler = async (e) => {
     e.preventDefault();
     const FIRST_NAME = e.target.firstName.value;
@@ -32,6 +41,11 @@ const Signup = () => {
     const confirmPassword = e.target.confirmPassword.value;
     const PROFILE_TYPE = "USERNAME";
     const USER_ID = Math.floor(Math.random() * 1000 * 10000000);
+    const TENANT_ID = Math.floor(Math.random() * 1000 * 10000 * 1000);
+    const CREATED_BY = "";
+    const CREATED_ON = dateTime;
+    const LAST_UPDATED_BY = "";
+    const LAST_UPDATED_ON = dateTime;
     // setJobtitle(jobTitle);
     // console.log(USER_ID);
     if (PASSWORD === confirmPassword) {
@@ -47,6 +61,11 @@ const Signup = () => {
             JOB_TITLE,
             PROFILE_TYPE,
             PROFILE_NAME,
+            CREATED_BY,
+            CREATED_ON,
+            LAST_UPDATED_BY,
+            LAST_UPDATED_ON,
+            TENANT_ID,
             // phone,
             PASSWORD,
           },
@@ -60,6 +79,7 @@ const Signup = () => {
             toast.error("Invalid Registration!");
           } else {
             toast.success(res.data.message);
+            // console.log("axios date", res.headers.date);
           }
           // if (res.status !== 201) {
           //   toast.error(res.data.error);
