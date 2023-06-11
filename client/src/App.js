@@ -16,6 +16,8 @@ import UserManage from "./pages/UserManage/UserManage";
 import UpdateUserProfile from "./pages/UserManage/UpdateUserProfile";
 import AddNewProfile from "./pages/UserManage/AddNewProfile";
 import EnterPriseSetup from "./pages/EnterPriseSetup/EnterPriseSetup";
+import AddTenant from "./pages/Tabs/AddTenant";
+import Tabs from "./pages/Tabs/Tabs";
 
 function App() {
   return (
@@ -27,7 +29,7 @@ function App() {
         <Route path="/adduser" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/enterprisesetup" element={<EnterPriseSetup/>} />
+        <Route path="/enterprisesetup" element={<Tabs/>} />
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/audit" element={<Audit />} />
         <Route path="/managetasks" element={<ManageTasks />} />
@@ -36,6 +38,7 @@ function App() {
         <Route path="/addprofile/" element={<AddNewProfile />} />
         <Route path="/myprofiles" element={<Profile />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
+        <Route path="/addTenant" element={<AddTenant />} />
       </Routes>
       <ToastContainer autoClose={3000} />
     </div>
