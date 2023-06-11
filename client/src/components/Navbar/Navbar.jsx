@@ -43,7 +43,7 @@ const Navbar = () => {
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                Enterprise Setup
+                Tanents Setup
               </NavLink>
             </li>
             <li>
@@ -125,7 +125,7 @@ const Navbar = () => {
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                Enterprise Setup
+               Tanents Setup
               </NavLink>
             </li>
           <li>

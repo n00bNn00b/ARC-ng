@@ -3,6 +3,8 @@ import React from "react";
 import { toast } from "react-toastify";
 import ManageEnterprise from "./ManageEnterprise";
 import Test from "./Test";
+import Tabs from "../Tabs/Tabs";
+
 const EnterPriseSetup = () => {
   const handleEnterprise = (e) => {
     e.preventDefault();
@@ -34,73 +36,74 @@ const EnterPriseSetup = () => {
   };
 
   return (
-    <div className="card  flex mx-auto  bg-base-100 shadow-xl mt-12">
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content  flex-row sm:flex-col ">
+    // <div className="card  flex mx-auto  bg-base-100 shadow-xl mt-12">
+    // <div className="hero min-h-screen bg-base-200">
+    //   <div className="hero-content  flex-row sm:flex-col ">
          
-          <div className="card  mx-5 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
-              <form onSubmit={handleEnterprise}>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Tenant Id</span>
-                  </label>
-                  <input
-                    type="number"
-                    name="TENANT_ID"
-                    placeholder="Tenant Id"
-                    className="input input-bordered"
-                    required
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Tenant Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="TENANT_NAME"
-                    placeholder="Tenant name"
-                    className="input input-bordered"
-                    required
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Enterprise Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="ENTERPRISE_NAME"
-                    placeholder="Enterprise Name"
-                    className="input input-bordered"
-                    required
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Enterprise Type</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="ENTERPRISE_TYPE"
-                    placeholder="Enterprise Type"
-                    className="input input-bordered"
-                    required
-                  />
-                </div>
-                <div className="form-control mt-6">
-                  <button className="btn btn-primary">Add</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="">{<ManageEnterprise />}</div>
-        </div>
-      </div>
-    </div>
-    
+    //       <div className="card  mx-5 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    //         <div className="card-body">
+    //           <form onSubmit={handleEnterprise}>
+    //             <div className="form-control">
+    //               <label className="label">
+    //                 <span className="label-text">Tenant Id</span>
+    //               </label>
+    //               <input
+    //                 type="number"
+    //                 name="TENANT_ID"
+    //                 placeholder="Tenant Id"
+    //                 className="input input-bordered"
+    //                 required
+    //               />
+    //             </div>
+    //             <div className="form-control">
+    //               <label className="label">
+    //                 <span className="label-text">Tenant Name</span>
+    //               </label>
+    //               <input
+    //                 type="text"
+    //                 name="TENANT_NAME"
+    //                 placeholder="Tenant name"
+    //                 className="input input-bordered"
+    //                 required
+    //               />
+    //             </div>
+    //             <div className="form-control">
+    //               <label className="label">
+    //                 <span className="label-text">Enterprise Name</span>
+    //               </label>
+    //               <input
+    //                 type="text"
+    //                 name="ENTERPRISE_NAME"
+    //                 placeholder="Enterprise Name"
+    //                 className="input input-bordered"
+    //                 required
+    //               />
+    //             </div>
+    //             <div className="form-control">
+    //               <label className="label">
+    //                 <span className="label-text">Enterprise Type</span>
+    //               </label>
+    //               <input
+    //                 type="text"
+    //                 name="ENTERPRISE_TYPE"
+    //                 placeholder="Enterprise Type"
+    //                 className="input input-bordered"
+    //                 required
+    //               />
+    //             </div>
+    //             <div className="form-control mt-6">
+    //               <button className="btn btn-primary">Add</button>
+    //             </div>
+    //           </form>
+    //         </div>
+    //       </div>
+    //       <div className="">{<ManageEnterprise />}</div>
+    //     </div>
+    //   </div>
+      
+    // </div>
   
+  <Tabs/>
     
   );
 };

@@ -113,4 +113,17 @@ router.delete("/enterprise/:TENANT_ID", async (req, res) => {
   }
 });
 
+/*
+ get all tenants
+ */
+router.get("/tenants/", async (req, res) => {
+  try {
+    const tenantData = await Tenant.find({});
+    res.status(200).json(tenantData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;
