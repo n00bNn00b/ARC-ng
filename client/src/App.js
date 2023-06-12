@@ -18,6 +18,7 @@ import AddNewProfile from "./pages/UserManage/AddNewProfile";
 import EnterPriseSetup from "./pages/EnterPriseSetup/EnterPriseSetup";
 import AddTenant from "./pages/Tabs/AddTenant";
 import Tabs from "./pages/Tabs/Tabs";
+import Demo from "./pages/Demo/Demo";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/myprofiles" element={<Profile />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/addTenant" element={<AddTenant />} />
+        <Route path="/demo" element={<Demo/>} />
       </Routes>
       <ToastContainer autoClose={3000} />
     </div>

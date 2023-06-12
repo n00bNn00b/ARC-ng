@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import TenantTab from './TenantTab';
-import { Link } from 'react-router-dom';
-import EnterpriseTab from './EnterpriseTab';
-const Tabs = () => {
+import { useState } from "react";
+import TenantTab from "../Tabs/TenantTab";
+import EnterpriseTab from "../Tabs/EnterpriseTab";
+import { Link } from "react-router-dom";
+
+export default function TabsComponent() {
   const [openTab, setOpenTab] = useState(1);
   const [selectedRowData, setSelectedRowData] = useState("");
 
@@ -10,8 +11,8 @@ const Tabs = () => {
     setSelectedRowData(data);
   };
 
-    return (
-      <div>
+  return (
+    <div>
       <div className="container mx-auto mt-20">
       <Link to="/addTenant" className="btn btn-primary flex mx-auto text-white w-48  my-9" >
         Add New Tenant
@@ -24,7 +25,7 @@ const Tabs = () => {
                 openTab === 1 ? "bg-purple-600 text-blue-500" : ""
               } inline-block px-4 py-2 text-gray-600 bg-white rounded shadow`}
             >
-             Tenants
+             Tenats
             </li>
             <li
               onClick={() => setOpenTab(2)}
@@ -47,7 +48,5 @@ const Tabs = () => {
         </div>
       </div>
     </div>
-    );
-};
-
-export default Tabs;
+  );
+}
