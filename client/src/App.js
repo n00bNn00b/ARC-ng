@@ -15,10 +15,11 @@ import Inbox from "./pages/Inbox/Inbox";
 import UserManage from "./pages/UserManage/UserManage";
 import UpdateUserProfile from "./pages/UserManage/UpdateUserProfile";
 import AddNewProfile from "./pages/UserManage/AddNewProfile";
-import EnterPriseSetup from "./pages/EnterPriseSetup/EnterPriseSetup";
 import AddTenant from "./pages/Tabs/AddTenant";
 import Tabs from "./pages/Tabs/Tabs";
 import Demo from "./pages/Demo/Demo";
+import RoleUpdate from "./pages/RoleUpdate/RoleUpdate";
+import RoleDragAndDrop from "./pages/RoleUpdate/RoleDragAndDrop";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Route path="/adduser" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/enterprisesetup" element={<Tabs/>} />
+        <Route path="/enterprisesetup" element={<Tabs/>} />{/*israt*/}
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/audit" element={<Audit />} />
         <Route path="/managetasks" element={<ManageTasks />} />
@@ -39,8 +40,10 @@ function App() {
         <Route path="/addprofile/" element={<AddNewProfile />} />
         <Route path="/myprofiles" element={<Profile />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
-        <Route path="/addTenant" element={<AddTenant />} />
-        <Route path="/demo" element={<Demo/>} />
+        <Route path="/addTenant" element={<AddTenant />} /> {/*israt*/}
+        <Route path="/addRole" element={<RoleUpdate/>} />{/*israt*/}
+        <Route path="/roleupdate" element={<RoleDragAndDrop/>} />{/*israt*/}
+        <Route path="/demo" element={<Demo/>} />{/*israt*/}
       </Routes>
       <ToastContainer autoClose={3000} />
     </div>
