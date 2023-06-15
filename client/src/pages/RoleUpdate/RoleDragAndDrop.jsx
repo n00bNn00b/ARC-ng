@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const RoleDragAndDrop = () => {
   const location = useLocation();
@@ -146,23 +146,33 @@ const RoleDragAndDrop = () => {
 
   return (
     <div className="mt-20">
-      <div className="grid grid-cols-1 text-center text-lg">
-        {user.FIRST_NAME}-{user.USER_ID}
+      <div className="grid grid-cols-3 g-4 m-4 justify-between card ">
+        <div className="text-center m-2 border-dashed border-2  justify-center rounded-lg shadow-lg p-4">
+            <p className="text-2xl p-1">User Name : {user?.FIRST_NAME}</p> 
+            <p className="text-sm p-1">User Id: {user.USER_ID}</p> 
+            <div className="text-sm">
+            <Link  to="/addRole" className=" text-white mx-auto text-sm btn btn-sm btn-primary ">
+                Back to Previous
+            </Link>
+            </div>
+            
+        </div>
+       
       </div>
       <div>
-        <div className="h-1 p-4 mt-4 grid grid-cols-1 justify-center text-center text-lg">
+        {/* <div className="h-1 p-4 mt-4 grid grid-cols-1 justify-center text-center text-lg">
           Drag and Drop Example
-        </div>
-        <div className="grid grid-cols-2 gap-1">
+        </div> */}
+        <div className="grid grid-cols-2 gap-3 p-4 m-4">
           <div
-            className="p-4 mt-5 bg-white rounded-lg shadow-lg"
+            className="p-4 mt-5 bg-white rounded-lg shadow-lg border-dashed border-2"
             onDragOver={handleDragOverLeft}
             onDrop={handleOnDropLeft}
           >
             {/* Source List */}
-            <p>Roles </p>
-            <ul className="list-none p-0 m-0 bg-indigo-200 border min-h-40">
-              {list.map((item) => (
+            <p className="text-center m-2 text-sm text-white mx-auto btn btn-sm btn-success">Roles </p>
+            <ul className="list-none p-0 m-0  min-h-40">
+              {list?.map((item) => (
                 <li
                   key={item._id}
                   id={item._id}
@@ -181,8 +191,8 @@ const RoleDragAndDrop = () => {
             onDrop={handleOnDrop}
           >
             {/* Target List */}
-            <p>Assigned Roles</p>
-            <ul className="list-none p-0 m-0 bg-indigo-200  min-h-40">
+            <p className="text-center m-2 text-sm text-white mx-auto btn btn-sm btn-success">Assigned Roles</p>
+            <ul className="list-none p-0 m-0  min-h-40">
               {dragList.map((item) => (
                 <li
                   key={item._id}
