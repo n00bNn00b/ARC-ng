@@ -48,6 +48,16 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
+                to="/addRole"
+                className={({ isActive }) =>
+                  isActive ? "bg-warning focused" : ""
+                }
+              >
+                Role Update
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/inbox"
                 className={({ isActive }) =>
                   isActive ? "bg-warning focused" : ""
@@ -119,13 +129,23 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink
+              to="/enterprisesetup"
+              className={({ isActive }) =>
+                isActive ? "bg-warning focused" : ""
+              }
+            >
+              Tanents Setup
+            </NavLink>
+          </li>
+          <li>
               <NavLink
-                to="/enterprisesetup"
+                to="/addRole"
                 className={({ isActive }) =>
                   isActive ? "bg-warning focused" : ""
                 }
               >
-               Tanents Setup
+                Role Update
               </NavLink>
             </li>
           <li>
