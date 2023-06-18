@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Signup = () => {
   // const img = "https://cdn-icons-png.flaticon.com/512/5582/5582931.png";
   const [JOB_TITLE, setJobtitle] = useState("");
+  // const [tenants, setTenants] = useState([]);
 
   const jobtitles = [
     {
@@ -20,6 +21,13 @@ const Signup = () => {
       name: "Staff",
     },
   ];
+  // console.log(tenants);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:5000/enterprise")
+  //     .then((res) => setTenants(res.data))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   let today = new Date();
   let date =
@@ -41,7 +49,7 @@ const Signup = () => {
     const confirmPassword = e.target.confirmPassword.value;
     const PROFILE_TYPE = "USERNAME";
     const USER_ID = Math.floor(Math.random() * 1000 * 10000000);
-    const TENANT_ID = Math.floor(Math.random() * 1000 * 10000 * 1000);
+    const TENANT_ID = 30;
     const CREATED_BY = "";
     const CREATED_ON = dateTime;
     const LAST_UPDATED_BY = "";
@@ -217,6 +225,7 @@ const Signup = () => {
               placeholder="Enter your password"
               name="password"
               className="input input-bordered w-full max-w-xs"
+              autoComplete="on"
               required
             />
 
@@ -230,6 +239,7 @@ const Signup = () => {
               placeholder="Confirm your password"
               name="confirmPassword"
               className="input input-bordered w-full max-w-xs"
+              autoComplete="on"
               required
             />
             <input
