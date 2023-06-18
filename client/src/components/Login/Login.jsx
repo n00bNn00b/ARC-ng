@@ -23,16 +23,16 @@ const Login = () => {
   const navigate = useNavigate();
   const loginHandler = async (e) => {
     e.preventDefault();
-    const profileID = e.target.profileID.value;
+    const profileName = e.target.profileName.value;
     const password = e.target.password.value;
     const profileType = e.target.profileType.value;
     await axios
       .post(
         "/login",
         {
-          profileID,
-          profileType,
-          password,
+          PROFILE_NAME: profileName,
+          PROFILE_TYPE: profileType,
+          PASSWORD: password,
         },
         {
           "Content-Type": "application/json",
@@ -96,8 +96,8 @@ const Login = () => {
               </label>
               <input
                 type="text"
-                name="profileID"
-                placeholder="Enter your username"
+                name="profileName"
+                placeholder="Enter your profile name"
                 className="input input-bordered w-full max-w-xs"
                 required
               />
@@ -110,6 +110,7 @@ const Login = () => {
                 name="password"
                 placeholder="Enter your password"
                 className="input input-bordered w-full max-w-xs"
+                autoComplete="on"
                 required
               />
 
