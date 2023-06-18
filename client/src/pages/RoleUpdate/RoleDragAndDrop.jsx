@@ -152,7 +152,7 @@ const RoleDragAndDrop = () => {
             <p className="text-sm p-1">User Id: {user.USER_ID}</p> 
             <div className="text-sm">
             <Link  to="/addRole" className=" text-white mx-auto text-sm btn btn-sm btn-primary ">
-                Back to Previous
+                Back 
             </Link>
             </div>
             
