@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
+const Credentials = require("../model/credentialSchema");
 
 const Authenticate = async (req, res, next) => {
   try {
-    const token = req.cookies.jwtoken;
+    const token = req.cookies?.jwt;
     const verifyToken = jwt.verify(token, process.env.SECRET_TOKEN);
+    console.log(verifyToken);
 
-    const rootUser = await User.findOne({
+    const rootUser = await Credentials.findOne({
       _id: verifyToken._id,
       "tokens.token": token,
     });
@@ -18,7 +20,7 @@ const Authenticate = async (req, res, next) => {
     req.userId = rootUser._id;
     next();
   } catch (error) {
-    res.staus(401).send("Unauthorized Access!");
+    res.status(401).send("Unauthorized Access!");
     console.log(error);
   }
 };
