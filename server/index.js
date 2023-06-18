@@ -15,6 +15,7 @@ app.use(require("./router/task"));
 app.use(require("./router/profile"));
 app.use(require("./router/enterpriseSetting"));
 app.use(require("./router/role"));
+app.use(require("./router/userstep"));
 
 // app.use(express.static(path.join(__dirname, "/client/build")));
 // app.get("*", (req, res) => {

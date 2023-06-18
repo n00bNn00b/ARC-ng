@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Stepper from './Stepper';
-import Test from './Test';
 import TabsComponent from './TabsComponent';
 import DragAndDrop from './DragAndDrop';
 import axios from 'axios';
