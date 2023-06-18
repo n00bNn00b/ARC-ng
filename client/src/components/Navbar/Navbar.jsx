@@ -53,7 +53,17 @@ const Navbar = () => {
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                Role Update
+                Role 
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/stepper"
+                className={({ isActive }) =>
+                  isActive ? "bg-warning focused" : ""
+                }
+              >
+               Stepper
               </NavLink>
             </li>
             <li>
@@ -145,7 +155,17 @@ const Navbar = () => {
                   isActive ? "bg-warning focused" : ""
                 }
               >
-                Role Update
+                Role
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/stepper"
+                className={({ isActive }) =>
+                  isActive ? "bg-warning focused" : ""
+                }
+              >
+               Stepper
               </NavLink>
             </li>
           <li>

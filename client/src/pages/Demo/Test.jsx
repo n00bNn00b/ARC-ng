@@ -13,7 +13,7 @@ const Test = () => {
   };
 
   return (
-    <div class="p-5">
+    <div class="p-5 mt-20">
       <div class="mx-4 p-4">
         <div class="flex items-center">
           {currentStep === 1 ? (

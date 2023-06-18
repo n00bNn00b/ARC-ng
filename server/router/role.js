@@ -161,9 +161,9 @@ router.get("/roleassigned/:userId", async (req, res) => {
   }
 });
 
-deleteroles;
+//deleteroles;
 // delete in user generated table role and user
-router.delete("//:userId/:roleId", async (req, res) => {
+router.delete("/deleteroles/:userId/:roleId", async (req, res) => {
   try {
     const userId = req.params.userId;
     const roleId = req.params.roleId;

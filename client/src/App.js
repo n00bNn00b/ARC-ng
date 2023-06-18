@@ -20,6 +20,7 @@ import Tabs from "./pages/Tabs/Tabs";
 import Demo from "./pages/Demo/Demo";
 import RoleUpdate from "./pages/RoleUpdate/RoleUpdate";
 import RoleDragAndDrop from "./pages/RoleUpdate/RoleDragAndDrop";
+import Stepper from "./pages/Stepper/Stepper";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/addTenant" element={<AddTenant />} /> {/*israt*/}
         <Route path="/addRole" element={<RoleUpdate/>} />{/*israt*/}
         <Route path="/roleupdate" element={<RoleDragAndDrop/>} />{/*israt*/}
+        <Route path="/stepper" element={<Stepper/>} />{/*israt*/}
         <Route path="/demo" element={<Demo/>} />{/*israt*/}
       </Routes>
       <ToastContainer autoClose={3000} />
