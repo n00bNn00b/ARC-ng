@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import {RiDeleteBin5Fill} from "react-icons/ri";
+import {RiEditFill} from "react-icons/ri";
 import DeleteTenantModal from "./DeleteTenantModal";
 import EditTanent from "./EditTanent";
 
@@ -28,10 +29,10 @@ const TanentTable = ({ tenants,modal,setModal,deletemodal,deleteHandler,setDelet
               <td>{tenant.TENANT_ID}</td>
               <td>{tenant.TENANT_NAME}</td>
               <td className=""><label  onClick={() => {setModal(tenant); }}   htmlFor="update-entr-modal"className="btn btn-warning text-white mx-3 btn-sm">
-                 Update
+                 <RiEditFill/>
             </label>
         <label onClick={() => {setDeleteModal(tenant); }}  htmlFor="delete-enmodal"className="btn btn-error text-white mx-3 btn-sm">
-                Delete
+       <RiDeleteBin5Fill/>
           </label></td>
             
             </tr>

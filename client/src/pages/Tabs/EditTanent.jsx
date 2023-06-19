@@ -116,13 +116,13 @@ const EditTanent = ({modal, setModal}) => {
             <input
               type="submit"
               value="UPDATE"
-              className="btn btn-primary text-white"
+              className="btn btn-sm btn-primary text-white"
               htmlFor="update-entr-modal"
             />
 
             <label
               htmlFor="update-entr-modal"
-              className="btn btn-error text-white"
+              className="btn btn-sm btn-error text-white"
             >
               Cancel
             </label>

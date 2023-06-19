@@ -20,12 +20,12 @@ const DeleteTenantModal = ({deletemodal,deleteHandler}) => {
         <div className="modal-action">
           <label
             htmlFor="delete-enmodal"
-            className="btn btn-error"
+            className="btn btn-sm  btn-error"
             onClick={() => deleteHandler(TENANT_ID)}
           >
             Yes
           </label>
-          <label htmlFor="delete-enmodal" className="btn btn-success">
+          <label htmlFor="delete-enmodal" className="btn btn-sm btn-success text-white">
             No
           </label>
         </div>

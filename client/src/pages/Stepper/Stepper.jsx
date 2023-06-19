@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Stepper.css";
 import { TiTick } from "react-icons/ti";
+
 import axios from "axios";
 const Stepper = () => {
   //const steps = ["Customer Info", "Shipping Info", "Payment", "Step 4","Step 5"];
