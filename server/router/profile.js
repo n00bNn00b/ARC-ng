@@ -59,15 +59,27 @@ router.get("/users", async (req, res) => {
 router.post("/addprofile", async (req, res) => {
   const { USER_ID, PROFILE_TYPE, PROFILE_NAME } = req.body;
   try {
-    const userProfile = new UserProfile({
-      USER_ID,
-      PROFILE_TYPE,
-      PROFILE_NAME,
+    const profileNameExist = await UserProfile.findOne({
+      PROFILE_NAME: PROFILE_NAME,
     });
+    const profileTypeExist = await UserProfile.findOne({
+      PROFILE_TYPE: PROFILE_TYPE,
+    });
+    if (profileNameExist && profileTypeExist) {
+      return res
+        .status(422)
+        .json({ error: "A Profile already exists with the following inputs!" });
+    } else {
+      const userProfile = new UserProfile({
+        USER_ID,
+        PROFILE_TYPE,
+        PROFILE_NAME,
+      });
 
-    await userProfile.save();
-    // console.log(user);
-    res.status(201).json({ message: "A Profile Has been added!" });
+      await userProfile.save();
+      // console.log(user);
+      res.status(201).json({ message: "A Profile Has been added!" });
+    }
   } catch (error) {
     res.status(422).json({ message: "Profile Adding Failed!" });
   }
