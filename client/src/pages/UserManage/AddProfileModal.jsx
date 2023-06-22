@@ -23,7 +23,7 @@ const AddProfileModal = ({ modal }) => {
           toast.error(res.data.message);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err.response.data.error));
     e.target.reset();
   };
   return (
