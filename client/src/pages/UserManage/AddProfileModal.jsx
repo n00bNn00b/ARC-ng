@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { toast } from "react-toastify";
 
 const AddProfileModal = ({ modal }) => {
   const { USER_ID } = modal;
@@ -7,7 +8,7 @@ const AddProfileModal = ({ modal }) => {
     e.preventDefault();
     const profileType = e.target.profileType.value;
     const profileName = e.target.profileName.value;
-    console.log(profileType, " : ", profileName);
+    // console.log(profileType, " : ", profileName);
     const url = "http://localhost:5000/addprofile";
     await axios
       .post(url, {
@@ -15,8 +16,15 @@ const AddProfileModal = ({ modal }) => {
         PROFILE_TYPE: profileType,
         PROFILE_NAME: profileName,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success(res.data.message);
+        } else {
+          toast.error(res.data.message);
+        }
+      })
       .catch((err) => console.log(err));
+    e.target.reset();
   };
   return (
     <div>
