@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import UserUpdateModal from "./UserUpdateModal";
-import { Link } from "react-router-dom";
+import AddProfileModal from "./AddProfileModal";
 
 const UserProfileTable = ({ profiles }) => {
   const [modal, setModal] = useState("");
+  // console.log(profiles);
 
   return (
     <div className="overflow-x-auto overflow-y-auto mx-2">
@@ -30,6 +31,7 @@ const UserProfileTable = ({ profiles }) => {
               <td>{index + 1}</td>
               <td>{profile.PROFILE_TYPE}</td>
               <td>{profile.PROFILE_NAME}</td>
+
               <td className="flex space-x-2 mx-5">
                 <label
                   onClick={() => setModal(profile)}
@@ -40,13 +42,17 @@ const UserProfileTable = ({ profiles }) => {
                 >
                   Update Profile
                 </label>
-                <UserUpdateModal modal={modal} />
-                <Link
-                  to="/addprofile"
+                <label
+                  onClick={() => setModal(profile)}
+                  htmlFor="profile-modal"
+                  // to={`/updateuserprofile/${user._id}`}
                   className="btn btn-sm btn-primary text-white "
+                  aria-label="Add Profile"
                 >
                   Add Profile
-                </Link>
+                </label>
+                <UserUpdateModal modal={modal} />
+                <AddProfileModal modal={modal} />
               </td>
             </tr>
           ))}
