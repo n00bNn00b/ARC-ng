@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useReducer } from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
@@ -20,37 +20,46 @@ import Demo from "./pages/Demo/Demo";
 import RoleUpdate from "./pages/RoleUpdate/RoleUpdate";
 import RoleDragAndDrop from "./pages/RoleUpdate/RoleDragAndDrop";
 import Stepper from "./pages/Stepper/Stepper";
+import { initialState, reducer } from "./reducer/UserReducer";
+
+export const UserContext = createContext();
 
 function App() {
+  const [user, dispatch] = useReducer(reducer, initialState);
   return (
     <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/manageuser" element={<UserManage />} />
-        <Route path="/adduser" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/enterprisesetup" element={<Tabs />} />
-        {/*israt*/}
-        <Route path="/inbox" element={<Inbox />} />
-        <Route path="/audit" element={<Audit />} />
-        <Route path="/managetasks" element={<ManageTasks />} />
-        <Route path="/addtask" element={<AddTask />} />
-        <Route path="/updateuserprofile/:id" element={<UpdateUserProfile />} />
-        <Route path="/myprofiles" element={<Profile />} />
-        <Route path="/resetpassword" element={<ResetPassword />} />
-        <Route path="/addTenant" element={<AddTenant />} /> {/*israt*/}
-        <Route path="/addRole" element={<RoleUpdate />} />
-        {/*israt*/}
-        <Route path="/roleupdate" element={<RoleDragAndDrop />} />
-        {/*israt*/}
-        <Route path="/stepper" element={<Stepper />} />
-        {/*israt*/}
-        <Route path="/demo" element={<Demo />} />
-        {/*israt*/}
-      </Routes>
-      <ToastContainer autoClose={3000} />
+      <UserContext.Provider value={{ user, dispatch }}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/manageuser" element={<UserManage />} />
+          <Route path="/adduser" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/enterprisesetup" element={<Tabs />} />
+          {/*israt*/}
+          <Route path="/inbox" element={<Inbox />} />
+          <Route path="/audit" element={<Audit />} />
+          <Route path="/managetasks" element={<ManageTasks />} />
+          <Route path="/addtask" element={<AddTask />} />
+          <Route
+            path="/updateuserprofile/:id"
+            element={<UpdateUserProfile />}
+          />
+          <Route path="/myprofiles" element={<Profile />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route path="/addTenant" element={<AddTenant />} /> {/*israt*/}
+          <Route path="/addRole" element={<RoleUpdate />} />
+          {/*israt*/}
+          <Route path="/roleupdate" element={<RoleDragAndDrop />} />
+          {/*israt*/}
+          <Route path="/stepper" element={<Stepper />} />
+          {/*israt*/}
+          <Route path="/demo" element={<Demo />} />
+          {/*israt*/}
+        </Routes>
+        <ToastContainer autoClose={3000} />
+      </UserContext.Provider>
     </div>
   );
 }

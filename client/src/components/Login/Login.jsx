@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardLogo from "../CardLogo/CardLogo";
 import LogoFull from "../LogoFull/LogoFull";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { UserContext } from "../../App";
 
 const Login = () => {
+  const [userID, setUserID] = useState();
+
+  const { user, dispatch } = useContext(UserContext);
   // const jobtitles = [
   //   {
   //     id: 1,
@@ -21,6 +25,7 @@ const Login = () => {
   //   },
   // ];
   const navigate = useNavigate();
+  console.log(userID);
   const loginHandler = async (e) => {
     e.preventDefault();
     const profileName = e.target.profileName.value;
@@ -39,11 +44,13 @@ const Login = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.error) {
           toast.error(res.data.error);
         } else {
+          dispatch({ type: "USER", payload: true });
           toast.success(res.data.message);
+          setUserID(res.data.USER_ID);
           navigate("/dashboard");
         }
       })
