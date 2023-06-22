@@ -12,16 +12,18 @@ const Authenticate = async (req, res, next) => {
       _id: verifyToken._id,
       "tokens.token": token,
     });
+
     if (!rootUser) {
       throw new Error("User not Found!");
     }
     req.token = token;
     req.rootUser = rootUser;
     req.userId = rootUser._id;
+
     next();
   } catch (error) {
-    res.status(401).send("Unauthorized Access!");
-    console.log(error);
+    res.status(401).json({ message: "Unauthorized Access!" });
+    console.log("errors: authenticate: ", error);
   }
 };
 

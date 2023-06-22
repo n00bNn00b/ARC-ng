@@ -55,6 +55,7 @@ router.post("/login", async (req, res) => {
         } else {
           res.json({
             message: "Login Successful!",
+            USER_ID,
           });
         }
       } else {
@@ -66,6 +67,11 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("jwt", { path: "/" });
+  res.status(200).json({ message: "User loggedout!" });
 });
 
 module.exports = router;
