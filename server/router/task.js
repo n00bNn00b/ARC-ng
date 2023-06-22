@@ -3,6 +3,7 @@ const router = express.Router();
 
 require("../db/conn");
 const Task = require("../model/taskSchema");
+const Authenticate = require("../middleware/authenticate");
 
 router.post("/addTask/", async (req, res) => {
   const taskList = req.body;
@@ -20,9 +21,11 @@ router.post("/addTask/", async (req, res) => {
   }
 });
 
-router.get("/tasks/", async (req, res) => {
+router.get("/tasks", async (req, res) => {
   try {
     const tasks = await Task.find({});
+    // const token = req.cookies.jwt;
+    // console.log(token);
     res.status(200).json(tasks);
   } catch (err) {
     console.log(err);
