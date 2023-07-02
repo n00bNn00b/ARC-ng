@@ -71,7 +71,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/logout", (req, res) => {
   res.clearCookie("jwt", { path: "/" });
-  res.status(200).json({ message: "User loggedout!" });
+  res.status(200).json({ message: "Successfully Logged Out!" });
 });
 
 module.exports = router;

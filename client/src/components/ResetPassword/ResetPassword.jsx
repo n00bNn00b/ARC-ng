@@ -1,6 +1,5 @@
 import React from "react";
 import CardLogo from "../CardLogo/CardLogo";
-import Footer from "../Footer/Footer";
 
 const ResetPassword = () => {
   return (
@@ -8,7 +7,9 @@ const ResetPassword = () => {
       <div className="my-20 flex mx-auto card w-96 bg-base-100 shadow-xl">
         <CardLogo />
         <div className="card-body">
-          <h2 className="card-title">Reset Your Password</h2>
+          <h2 className="text-2xl text-center font-semibold my-5">
+            Reset Your Password
+          </h2>
           <input
             type="email"
             placeholder="Type your email here"
@@ -21,7 +22,6 @@ const ResetPassword = () => {
           />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const app = express();
 const cors = require("cors");
 const port = 5000 || process.env.PORT;
@@ -8,6 +9,7 @@ const port = 5000 || process.env.PORT;
 require("dotenv").config();
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.use(require("./router/user"));
 app.use(require("./router/auth"));
@@ -21,8 +23,6 @@ app.use(require("./router/userstep"));
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "/client/build/index.html"));
 // });
-
-
 
 app.get("/", (req, res) => {
   res.send("Arc-ng Server is Running 😎!");

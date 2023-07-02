@@ -5,6 +5,7 @@ const Credentials = require("../model/credentialSchema");
 const Authenticate = async (req, res, next) => {
   try {
     const token = req.cookies?.jwt;
+    console.log(token, "token");
     const verifyToken = jwt.verify(token, process.env.SECRET_TOKEN);
     console.log(verifyToken);
 

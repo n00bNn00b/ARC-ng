@@ -21,14 +21,14 @@ router.post("/addTask/", async (req, res) => {
   }
 });
 
-router.get("/tasks", async (req, res) => {
+router.get("/tasks", Authenticate, async (req, res) => {
   try {
     const tasks = await Task.find({});
     // const token = req.cookies.jwt;
     // console.log(token);
     res.status(200).json(tasks);
   } catch (err) {
-    console.log(err);
+    console.log("errorMsg: ", err);
     res.status(500).json({ message: err.message });
   }
 });
