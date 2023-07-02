@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardLogo from "../CardLogo/CardLogo";
 import LogoFull from "../LogoFull/LogoFull";
@@ -7,9 +7,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../App";
 
 const Login = () => {
-  const [userID, setUserID] = useState();
-
-  const { user, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
   // const jobtitles = [
   //   {
   //     id: 1,
@@ -25,7 +23,6 @@ const Login = () => {
   //   },
   // ];
   const navigate = useNavigate();
-  console.log(userID);
   const loginHandler = async (e) => {
     e.preventDefault();
     const profileName = e.target.profileName.value;
@@ -48,9 +45,12 @@ const Login = () => {
         if (res.data.error) {
           toast.error(res.data.error);
         } else {
-          dispatch({ type: "USER", payload: true });
           toast.success(res.data.message);
-          setUserID(res.data.USER_ID);
+          sessionStorage.setItem("myID", res.data.USER_ID);
+          sessionStorage.setItem("loggedIn", true);
+
+          dispatch({ type: "USER", payload: true });
+
           navigate("/dashboard");
         }
       })
@@ -61,6 +61,7 @@ const Login = () => {
       });
     // e.target.reset();
   };
+
   return (
     <>
       <div className="mt-20 flex mx-auto w-full">

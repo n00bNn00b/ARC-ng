@@ -21,43 +21,139 @@ import RoleUpdate from "./pages/RoleUpdate/RoleUpdate";
 import RoleDragAndDrop from "./pages/RoleUpdate/RoleDragAndDrop";
 import Stepper from "./pages/Stepper/Stepper";
 import { initialState, reducer } from "./reducer/UserReducer";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
+import useLoggedIn from "./hooks/useLoggedIn";
+import NotFound from "./pages/NotFound/NotFound";
 
 export const UserContext = createContext();
 
 function App() {
   const [user, dispatch] = useReducer(reducer, initialState);
+  const { loggedIn } = useLoggedIn();
+
   return (
     <div>
       <UserContext.Provider value={{ user, dispatch }}>
-        <Navbar />
+        {loggedIn && <Navbar />}
+
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/manageuser" element={<UserManage />} />
-          <Route path="/adduser" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/enterprisesetup" element={<Tabs />} />
+          <Route path="/" element={!loggedIn ? <Login /> : <Dashboard />} />
+          <Route
+            path="/manageuser"
+            element={
+              <RequireAuth>
+                <UserManage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/adduser"
+            element={
+              <RequireAuth>
+                <Signup />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/enterprisesetup"
+            element={
+              <RequireAuth>
+                <Tabs />
+              </RequireAuth>
+            }
+          />
           {/*israt*/}
-          <Route path="/inbox" element={<Inbox />} />
-          <Route path="/audit" element={<Audit />} />
-          <Route path="/managetasks" element={<ManageTasks />} />
-          <Route path="/addtask" element={<AddTask />} />
+          <Route
+            path="/inbox"
+            element={
+              <RequireAuth>
+                <Inbox />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/audit"
+            element={
+              <RequireAuth>
+                <Audit />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/managetasks"
+            element={
+              <RequireAuth>
+                <ManageTasks />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/addtask"
+            element={
+              <RequireAuth>
+                <AddTask />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/updateuserprofile/:id"
-            element={<UpdateUserProfile />}
+            element={
+              <RequireAuth>
+                <UpdateUserProfile />
+              </RequireAuth>
+            }
           />
-          <Route path="/myprofiles" element={<Profile />} />
+          <Route
+            path="/myprofiles"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
           <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/addTenant" element={<AddTenant />} /> {/*israt*/}
-          <Route path="/addRole" element={<RoleUpdate />} />
+          <Route
+            path="/addTenant"
+            element={
+              <RequireAuth>
+                <AddTenant />
+              </RequireAuth>
+            }
+          />{" "}
           {/*israt*/}
-          <Route path="/roleupdate" element={<RoleDragAndDrop />} />
+          <Route
+            path="/addRole"
+            element={
+              <RequireAuth>
+                <RoleUpdate />
+              </RequireAuth>
+            }
+          />
+          {/*israt*/}
+          <Route
+            path="/roleupdate"
+            element={
+              <RequireAuth>
+                <RoleDragAndDrop />
+              </RequireAuth>
+            }
+          />
           {/*israt*/}
           <Route path="/stepper" element={<Stepper />} />
           {/*israt*/}
           <Route path="/demo" element={<Demo />} />
           {/*israt*/}
+          <Route path="*" element={<NotFound />} />
         </Routes>
+
         <ToastContainer autoClose={3000} />
       </UserContext.Provider>
     </div>
