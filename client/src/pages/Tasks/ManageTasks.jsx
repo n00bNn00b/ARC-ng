@@ -11,7 +11,7 @@ const TaskList = () => {
   const [modal, setModal] = useState("");
   const [selected, setSelected] = useState();
   useEffect(() => {
-    const url = "/tasks";
+    const url = "http://localhost:9000/tasks";
     axios.get(url).then((res) => {
       setTasks(res.data);
       // console.log(res.data);

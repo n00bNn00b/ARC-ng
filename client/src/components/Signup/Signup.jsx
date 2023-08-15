@@ -24,7 +24,7 @@ const Signup = () => {
   // console.log(tenants);
   // useEffect(() => {
   //   axios
-  //     .get("http://localhost:5000/enterprise")
+  //     .get("http://localhost:9000/enterprise")
   //     .then((res) => setTenants(res.data))
   //     .catch((err) => console.log(err));
   // }, []);

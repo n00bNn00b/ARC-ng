@@ -8,7 +8,7 @@ const Logout = () => {
   const { dispatch } = useContext(UserContext);
   const navigate = useNavigate();
   const handleLogout = () => {
-    const url = "http://localhost:5000/logout";
+    const url = "http://localhost:9000/logout";
     axios
       .get(url)
       .then((res) => {

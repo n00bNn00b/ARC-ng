@@ -7,7 +7,7 @@ const Profile = () => {
   console.log(myID);
 
   useEffect(() => {
-    const url = `http://localhost:5000/userProfile/${myID}`;
+    const url = `http://localhost:9000/userProfile/${myID}`;
     axios
       .get(url)
       .then((res) => {

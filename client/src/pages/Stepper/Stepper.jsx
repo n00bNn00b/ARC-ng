@@ -4,26 +4,24 @@ import { TiTick } from "react-icons/ti";
 import axios from "axios";
 const Stepper = () => {
   //const steps = ["Customer Info", "Shipping Info", "Payment", "Step 4","Step 5"];
-  const [steps,setSteps] = useState([]) ;
-  const [stepCode,setStepsCode] = useState([]) ;
+  const [steps, setSteps] = useState([]);
+  const [stepCode, setStepsCode] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const [maxSteps, setMaxSteps] = useState(0);
-  
-  useEffect(()=>{
-    axios
-       .get(`/arc_user_steps/${6084407511}`)
-       .then((data) => {
-        console.log(data.data)
-          const {COMPLETE_STEPS,MAX_STEPS} = data.data;
-          const completedStepNames = COMPLETE_STEPS.map((step) => step.STEP_NAME);
-          const step_code = COMPLETE_STEPS.map((step) => step.STEP_CODE);
-          setStepsCode(step_code);
-          console.log(completedStepNames);
-          setSteps(completedStepNames);
-          setMaxSteps(MAX_STEPS);
-       });
-  },[]);
+
+  useEffect(() => {
+    axios.get(`/arc_user_steps/${6084407511}`).then((data) => {
+      console.log(data.data);
+      const { COMPLETE_STEPS, MAX_STEPS } = data.data;
+      const completedStepNames = COMPLETE_STEPS.map((step) => step.STEP_NAME);
+      const step_code = COMPLETE_STEPS.map((step) => step.STEP_CODE);
+      setStepsCode(step_code);
+      console.log(completedStepNames);
+      setSteps(completedStepNames);
+      setMaxSteps(MAX_STEPS);
+    });
+  }, []);
 
   // useEffect(() => {
   //   axios
@@ -43,12 +41,12 @@ const Stepper = () => {
   //       }
   //     }
   //   })
-    
+
   //   .catch((err) => console.log(err));
 
   // },[]);
 
-const demostepData = parseInt(stepCode[steps.length-1]);
+  const demostepData = parseInt(stepCode[steps.length - 1]);
 
   return (
     <div>
@@ -61,33 +59,36 @@ const demostepData = parseInt(stepCode[steps.length-1]);
             } `}
           >
             <div className="step">
-
-              {i + 1 < currentStep || complete ? <TiTick size={24} /> : stepCode[i]|| demostepData+i }
+              {i + 1 < currentStep || complete ? (
+                <TiTick size={24} />
+              ) : (
+                stepCode[i] || demostepData + i
+              )}
             </div>
-            <p className="text-gray-500">{steps[i]||" --- "}</p>
+            <p className="text-gray-500">{steps[i] || " --- "}</p>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 justify-center w-24 mx-auto mt-8">
-      {!complete && (
-        <button
-          className="btn  btn-sm btn-primary text-white "
-          onClick={() => {
-            currentStep === maxSteps
-              ? setComplete(true)
-              : setCurrentStep((prev) => prev + 1);
-          }}
-        >
-          {currentStep === steps.length ? "Finish" : "Next"}
-        </button>
-      )}
-      {complete && <div className="grid grid-cols-1 justify-center">Completed</div>}
+        {!complete && (
+          <button
+            className="btn  btn-sm btn-primary text-white "
+            onClick={() => {
+              currentStep === maxSteps
+                ? setComplete(true)
+                : setCurrentStep((prev) => prev + 1);
+            }}
+          >
+            {currentStep === steps.length ? "Finish" : "Next"}
+          </button>
+        )}
+        {complete && (
+          <div className="grid grid-cols-1 justify-center">Completed</div>
+        )}
       </div>
-    
     </div>
   );
 };
 
 export default Stepper;
-
