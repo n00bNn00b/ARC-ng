@@ -3,9 +3,9 @@ const router = express.Router();
 
 require("../db/conn");
 const Task = require("../model/taskSchema");
-const Authenticate = require("../middleware/authenticate");
+const authenticate = require("../middleware/authenticate");
 
-router.post("/addTask/", async (req, res) => {
+router.post("/addTask/", authenticate, async (req, res) => {
   const taskList = req.body;
   if (!taskList) {
     return res.status(422).json({
@@ -21,7 +21,7 @@ router.post("/addTask/", async (req, res) => {
   }
 });
 
-router.get("/tasks", Authenticate, async (req, res) => {
+router.get("/tasks", authenticate, async (req, res) => {
   try {
     const tasks = await Task.find({});
     // const token = req.cookies.jwt;
@@ -37,7 +37,7 @@ router.get("/tasks/:username", async (req, res) => {
   res.send("Working!");
 });
 //
-router.delete("/task/:id", async (req, res) => {
+router.delete("/task/:id", authenticate, async (req, res) => {
   const { id } = req.params;
   try {
     const task = await Task.findByIdAndDelete(id);

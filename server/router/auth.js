@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
       if (userIdExist) {
         const isMatched = await bcrypt.compare(PASSWORD, userIdExist.PASSWORD);
         token = await userIdExist.generateAuthToken();
-        console.log("token: ", token);
+        console.log("token login: ", token);
         res.cookie("jwt", token, {
           expires: new Date(Date.now() + 604800000), //7days cookies
           httpOnly: true,
@@ -56,6 +56,7 @@ router.post("/login", async (req, res) => {
           res.json({
             message: "Login Successful!",
             USER_ID,
+            token,
           });
         }
       } else {
