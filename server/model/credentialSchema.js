@@ -31,7 +31,7 @@ credentialSchema.pre("save", async function (next) {
 
 credentialSchema.methods.generateAuthToken = async function () {
   try {
-    let token = jwt.sign({ _id: this._id }, process.env.SECRET_TOKEN);
+    let token = jwt.sign({ USER_ID: this.USER_ID }, process.env.SECRET_TOKEN);
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
     return token;

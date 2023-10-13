@@ -5,12 +5,14 @@ const Credentials = require("../model/credentialSchema");
 const Authenticate = async (req, res, next) => {
   try {
     const token = req.cookies?.jwt;
-    console.log(token, "token");
+    // const an = req.headers.Authorization;
+    // console.log("authorization: ", an);
+    console.log("token : ", token);
     const verifyToken = jwt.verify(token, process.env.SECRET_TOKEN);
-    console.log(verifyToken);
+    console.log("verify: ", verifyToken);
 
     const rootUser = await Credentials.findOne({
-      _id: verifyToken._id,
+      USER_ID: verifyToken.USER_ID,
       "tokens.token": token,
     });
 
@@ -19,7 +21,8 @@ const Authenticate = async (req, res, next) => {
     }
     req.token = token;
     req.rootUser = rootUser;
-    req.userId = rootUser._id;
+    req.userId = rootUser.USER_ID; //_id
+    console.log("root_user: ", rootUser.USER_ID);
 
     next();
   } catch (error) {
