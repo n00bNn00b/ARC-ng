@@ -20,11 +20,8 @@ router.post("/flask_login", async (req, res) => {
       password,
     });
 
-    if (response.status === 200) {
-      res.send(response.data);
-    } else {
-      res.status(response.status).send(response.data.error);
-    }
+    console.log(response);
+    res.send(response);
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
