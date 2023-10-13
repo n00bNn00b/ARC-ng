@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
   try {
     let token;
     const { PROFILE_TYPE, PROFILE_NAME, PASSWORD } = req.body;
-    if (!PROFILE_TYPE && !PROFILE_NAME && !PASSWORD) {
+    if (!PROFILE_TYPE || !PROFILE_NAME || !PASSWORD) {
       return res.status(400).json({ error: "Please fillup the Data!" });
     }
 
