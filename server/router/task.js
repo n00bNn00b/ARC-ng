@@ -21,7 +21,7 @@ router.post("/addTask/", authenticate, async (req, res) => {
   }
 });
 
-router.get("/tasks", authenticate, async (req, res) => {
+router.get("/tasks", async (req, res) => {
   try {
     const tasks = await Task.find({});
     // const token = req.cookies.jwt;

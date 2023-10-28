@@ -20,11 +20,38 @@ router.post("/flask_login", async (req, res) => {
       password,
     });
 
-    console.log(response);
-    res.send(response);
+    // console.log(response);
+    res.status(200).json(response.data);
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/flask_user", async (req, res) => {
+  const {
+    user_name,
+    first_name,
+    last_name,
+    email_address,
+    password,
+    privilege_names,
+    role_names,
+  } = req.body;
+  try {
+    const response = await axios.post("http://127.0.0.1:5000/users", {
+      user_name,
+      first_name,
+      last_name,
+      email_address,
+      password,
+      privilege_names,
+      role_names,
+    });
+    // console.log("response flask: ", response);
+    res.send(response);
+  } catch (error) {
+    console.log(error);
   }
 });
 
