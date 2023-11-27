@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Dashboard",
+    "navlink": "/dashboard"
+  },
+  {
+    "id": 2,
+    "name": "Tenants Setup",
+    "navlink": "/enterprisesetup"
+  },
+  {
+    "id": 3,
+    "name": "Role",
+    "navlink": "/addRole"
+  },
+  {
+    "id": 4,
+    "name": "Stepper",
+    "navlink": "/stepper"
+  },
+  {
+    "id": 5,
+    "name": "Inbox",
+    "navlink": "/inbox"
+  },
+  {
+    "id": 6,
+    "name": "Audit",
+    "navlink": "/audit"
+  },
+  {
+    "id": 7,
+    "name": "Manage Tasks",
+    "navlink": "/managetasks"
+  },
+  {
+    "id": 8,
+    "name": "Manage Users",
+    "navlink": "/manageuser"
+  },
+  {
+    "id": 9,
+    "name": "My Profiles",
+    "navlink": "/myprofiles"
+  }
+]

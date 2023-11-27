@@ -5,17 +5,34 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import DeleteModal from "./DeleteModal";
 import TaskUpdateModal from "./TaskUpdateModal";
+import Cookies from "js-cookie";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [modal, setModal] = useState("");
   const [selected, setSelected] = useState();
+  const [taskMessage, setTaskMessage] = useState("");
+
   useEffect(() => {
-    const url = "http://localhost:9000/tasks";
-    axios.get(url).then((res) => {
-      setTasks(res.data);
-      // console.log(res.data);
-    });
+    const url = "/tasks";
+    axios
+      .get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Cookies.get("jwt"),
+        },
+        withCredentials: true,
+      })
+      .then((res) => {
+        setTasks(res.data);
+      })
+      .catch((err) => {
+        // console.log("error: ", err);
+        if (err.response.status === 401) {
+          toast.error(err.response.data.message);
+          setTaskMessage(err.response.data.message);
+        }
+      });
   }, []);
 
   const deleteHandler = (id) => {
@@ -30,6 +47,11 @@ const TaskList = () => {
       }
     });
   };
+  const getCookie = () => {
+    const token = Cookies.get("jwt");
+    console.log(token);
+    return token;
+  };
   return (
     <div className="my-20">
       <div>
@@ -40,6 +62,7 @@ const TaskList = () => {
           Add Task
         </Link>
       </div>
+      <button onClick={getCookie}>Get Cookie</button>
       <div className="card mx-auto mb-20 bg-base-100 shadow-2xl">
         {tasks.length !== 0 ? (
           <div className="overflow-x-auto overflow-y-auto mx-2">
@@ -101,7 +124,7 @@ const TaskList = () => {
           </div>
         ) : (
           <div className="flex mx-auto shadow-2xl text-white text-xl badge badge-2xl badge-warning">
-            No Task Has been Assigned Yet!
+            {taskMessage ? taskMessage : "No Task Has been Assigned Yet! "}
           </div>
         )}
       </div>

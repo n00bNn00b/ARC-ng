@@ -9,13 +9,18 @@ function ManageEnterprise(props) {
   const [enterprise, setEnterprise] = useState([]);
   const [modal, setModal] = useState(null);
   const [deletemodal, setDeleteModal] = useState(null);
-  useEffect(() => {
+
+  const getEnterprise = async () => {
     const url = "/enterprise";
-    axios.get(url).then((res) => {
-      setEnterprise(res.data);
-      // console.log(res.data);
-    });
-  }, [enterprise]);
+    const res = await axios.get(url);
+    setEnterprise(res.data);
+    console.log(res.data);
+  };
+
+  useEffect(() => {
+    getEnterprise();
+  }, []);
+
   const deleteHandler = (TENANT_ID) => {
     console.log(TENANT_ID);
     axios.delete(`/enterprise/${TENANT_ID}`).then((res) => {
@@ -30,6 +35,7 @@ function ManageEnterprise(props) {
       }
     });
   };
+
   return (
     <div className=" m-2">
       <div>

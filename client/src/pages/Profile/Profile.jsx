@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 
 const Profile = () => {
   const [profiles, setProfiles] = useState([]);
-  const myID = sessionStorage.getItem("myID");
+  const myID = localStorage.getItem("myID");
   console.log(myID);
 
   useEffect(() => {
-    const url = `http://localhost:9000/userProfile/${myID}`;
+    const url = `/userProfile/${myID}`;
     axios
       .get(url)
       .then((res) => {
@@ -15,7 +15,7 @@ const Profile = () => {
       })
       .catch((err) => console.log(err));
   }, [myID]);
-  console.log(profiles);
+  // console.log(profiles);
   return (
     <div className="mt-20">
       <h2 className="text-2xl font-semibold text-primary text-center">

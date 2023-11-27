@@ -46,7 +46,7 @@ const Login = () => {
           toast.error(res.data.error);
         } else {
           toast.success(res.data.message);
-          sessionStorage.setItem("myID", res.data.USER_ID);
+          localStorage.setItem("myID", res.data.USER_ID);
           sessionStorage.setItem("loggedIn", true);
 
           dispatch({ type: "USER", payload: true });

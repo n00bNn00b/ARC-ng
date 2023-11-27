@@ -9,7 +9,7 @@ const AddProfileModal = ({ modal }) => {
     const profileType = e.target.profileType.value;
     const profileName = e.target.profileName.value;
     // console.log(profileType, " : ", profileName);
-    const url = "http://localhost:9000/addprofile";
+    const url = "/addprofile";
     await axios
       .post(url, {
         USER_ID,

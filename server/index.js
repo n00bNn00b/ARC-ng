@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const app = express();
 const cors = require("cors");
+const connection = require("./v2/db/database");
 
 const port = 9000 || process.env.PORT;
 
@@ -20,6 +21,11 @@ app.use(require("./router/enterpriseSetting"));
 app.use(require("./router/role"));
 app.use(require("./router/userstep"));
 
+// postgres
+async function initializeSequelize() {
+  await connection();
+}
+// app.use(require("./v2/router/profile"));
 //flask wrappers
 app.use(require("./router/testflask"));
 
@@ -27,6 +33,8 @@ app.use(require("./router/testflask"));
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "/client/build/index.html"));
 // });
+
+// initializeSequelize();
 
 app.get("/", (req, res) => {
   res.send("Arc-ng Server is Running 😎!");

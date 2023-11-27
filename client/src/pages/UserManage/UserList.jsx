@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserTable from "./UserTable";
 import UserProfileTable from "./UserProfileTable";
+import Cookies from "js-cookie";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -10,7 +11,13 @@ const UserList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/persons")
+      .get("/persons", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Cookies.get("jwt"),
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         setUsers(res.data);
       })

@@ -1,0 +1,82 @@
+import React, { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import EnterpriseTable from "./EnterpriseTable";
+import EnterpriseUpdateModal from "./EnterpriseUpdateModal";
+import DeleteEnterpriseModal from "./DeleteEnterpriseModal";
+function ManageEnterprise(props) {
+  const [enterprise, setEnterprise] = useState([]);
+  const [modal, setModal] = useState(null);
+  const [deletemodal, setDeleteModal] = useState(null);
+
+  const getEnterprise = async () => {
+    const url = "/enterprise";
+    const res = await axios.get(url);
+    setEnterprise(res.data);
+    console.log(res.data);
+  };
+
+  useEffect(() => {
+    getEnterprise();
+  }, []);
+
+  const deleteHandler = (TENANT_ID) => {
+    console.log(TENANT_ID);
+    axios.delete(`/api/enterprise/${TENANT_ID}`).then((res) => {
+      if (res.status === 200) {
+        const newEnterprise = enterprise.filter(
+          (entr) => entr.TENANT_ID !== TENANT_ID
+        );
+        setEnterprise([...newEnterprise]);
+        toast.success(res.data.message);
+      } else {
+        toast.warning(res.data.message);
+      }
+    });
+  };
+
+  return (
+    <div className=" m-2">
+      <div>
+        <div className="overflow-auto">
+          <table className="table p-12">
+            <thead className="">
+              <tr>
+                <th>Tenant Id</th>
+                <th>Tenant Name</th>
+                <th>Enterprise Name</th>
+                <th>Enterprise Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {enterprise.map((enterprise) => {
+                return (
+                  <EnterpriseTable
+                    key={enterprise._id}
+                    enterprise={enterprise}
+                    setModal={setModal}
+                    setDeleteModal={setDeleteModal}
+                  />
+                );
+              })}
+              {modal && (
+                <EnterpriseUpdateModal modal={modal} setModal={setModal} />
+              )}
+              {deletemodal && (
+                <DeleteEnterpriseModal
+                  deletemodal={deletemodal}
+                  setDeleteModal={setDeleteModal}
+                  deleteHandler={deleteHandler}
+                />
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ManageEnterprise;
