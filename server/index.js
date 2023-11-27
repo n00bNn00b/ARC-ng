@@ -7,7 +7,7 @@ const connection = require("./v2/db/database");
 
 const port = 9000 || process.env.PORT;
 
-// const path = require("path");
+const path = require("path");
 require("dotenv").config();
 app.use(express.json());
 app.use(cors());
@@ -29,10 +29,10 @@ async function initializeSequelize() {
 //flask wrappers
 app.use(require("./router/testflask"));
 
-// app.use(express.static(path.join(__dirname, "/client/build")));
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "/client/build/index.html"));
-// });
+app.use(express.static(path.join(__dirname, "./dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./dist/index.html"));
+});
 
 // initializeSequelize();
 
